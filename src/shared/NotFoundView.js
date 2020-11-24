@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Container, Typography, makeStyles } from "@material-ui/core";
-import Page from "src/utils/Page";
+import Page from "src/shared/Page";
 
 const useStyles = makeStyles((theme) => ({
   root: {
