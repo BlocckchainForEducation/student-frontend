@@ -86,7 +86,7 @@ export default function SignIn() {
         setSessionToken(body.token);
         setSessionRole(body.role);
       }
-      setRedirect(<Navigate to="/nh" replace={true}></Navigate>);
+      setRedirect(<Navigate to="/nh"></Navigate>);
     }
   }
   return (

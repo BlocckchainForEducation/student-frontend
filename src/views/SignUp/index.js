@@ -82,7 +82,7 @@ export default function SignUp() {
       setLocalRole(result.role);
       setErrors(null);
       setSuccess("Đăng kí tài khoản thành công!");
-      setTimeout(() => setRedirect(<Navigate to="/nh" replace={true}></Navigate>), 1000);
+      setTimeout(() => setRedirect(<Navigate to="/nh"></Navigate>), 1000);
     }
   }
 
