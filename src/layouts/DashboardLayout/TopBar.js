@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
-import clsx from "clsx";
-import PropTypes from "prop-types";
-import { AppBar, Badge, Box, Hidden, IconButton, Toolbar, makeStyles } from "@material-ui/core";
+import { AppBar, Badge, Box, Hidden, IconButton, makeStyles, Toolbar } from "@material-ui/core";
+import InputIcon from "@material-ui/icons/Input";
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
-import InputIcon from "@material-ui/icons/Input";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Logo from "src/shared/Logo";
+import { clearRole } from "../../utils/mng-role";
+import { clearToken } from "../../utils/mng-token";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -19,6 +21,8 @@ const useStyles = makeStyles(() => ({
 const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
   const classes = useStyles();
   const [notifications] = useState([]);
+  const navigate = useNavigate();
+  console.log(navigate);
 
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
@@ -33,7 +37,14 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton
+            color="inherit"
+            onClick={(e) => {
+              clearRole();
+              clearToken();
+              navigate("/");
+            }}
+          >
             <InputIcon />
           </IconButton>
         </Hidden>

@@ -4,7 +4,6 @@ import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/picker
 import "date-fns";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
-import { Thermometer } from "react-feather";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "src/utils/mng-token";
 import { setProfile } from "./redux";
