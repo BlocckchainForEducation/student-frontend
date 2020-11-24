@@ -7,20 +7,21 @@ import { updateImgSrc } from "./redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: "relative",
+    // position: "relative",
   },
   avatar: {
     height: "128px",
     width: "128px",
-    position: "absolute",
-    left: 0,
-    right: 0,
     margin: "auto",
-    zIndex: "1",
+    position: "relative",
+    // left: 0,
+    // right: 0,
+    // zIndex: "1",
   },
   paper: {
-    position: "absolute",
-    top: "64px",
+    // position: "absolute",
+    // top: "64px",
+    marginTop: "-64px",
     width: "100%",
   },
   name: {

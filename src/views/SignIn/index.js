@@ -81,10 +81,8 @@ export default function SignIn() {
       const body = await response.json();
       if (state.remember) {
         setLocalToken(body.token);
-        setLocalRole(body.role);
       } else {
         setSessionToken(body.token);
-        setSessionRole(body.role);
       }
       navigate("/nh/thong-tin-ca-nhan");
     }

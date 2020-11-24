@@ -8,6 +8,7 @@ import SignInView from "src/views/SignIn";
 import { getToken } from "./utils/mng-token";
 import StudentProfile from "./views/StudentProfile";
 import Test from "./Test";
+import AccountManagement from "./views/AccountManagement";
 
 const routes = [
   {
@@ -15,6 +16,7 @@ const routes = [
     element: <DashboardLayout />,
     children: [
       { path: "thong-tin-ca-nhan", element: <StudentProfile /> },
+      { path: "quan-ly-tai-khoan", element: <AccountManagement /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
   },
@@ -37,7 +39,7 @@ function Redirector(props) {
   if (!token) {
     return <Navigate to="/dang-ki"></Navigate>;
   } else {
-    return <Navigate to="/nh"></Navigate>;
+    return <Navigate to="/nh/thong-tin-ca-nhan"></Navigate>;
   }
 }
 

@@ -79,7 +79,6 @@ export default function SignUp() {
     } else {
       const result = await response.json();
       setLocalToken(result.token);
-      setLocalRole(result.role);
       setErrors(null);
       setSuccess("Đăng kí tài khoản thành công!");
       setTimeout(() => navigate("/nh/thong-tin-ca-nhan"), 1000);

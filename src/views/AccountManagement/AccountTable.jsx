@@ -1,15 +1,4 @@
-import {
-  Box,
-  makeStyles,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@material-ui/core";
+import { Box, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -21,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
     color: "white",
   },
-  body: { width: "100%", marginTop: "-50px", padding: theme.spacing(8, 3, 3, 3) },
+  body: { width: "100%", marginTop: "-32px", padding: theme.spacing(6, 3, 3, 3) },
 }));
 
 export default function AccountTable(props) {
@@ -50,11 +39,11 @@ export default function AccountTable(props) {
                 <TableRow>
                   <TableCell>1</TableCell>
                   <TableCell>Aq7DZm5J4jBJNPMCSaEAg2qOY9icCYoigIBOLAN8WPiV</TableCell>
-                  <TableCell>Không được lưu lại</TableCell>
-                  <TableCell>Tài khoản cấp 1 của tôi</TableCell>
+                  <TableCell>Không lưu</TableCell>
+                  <TableCell>Tài khoản trường cấp 1 của tôi</TableCell>
                 </TableRow>
                 <TableRow>
-                  <TableCell>1</TableCell>
+                  <TableCell>2</TableCell>
                   <TableCell>AnLpO4jxLPGUjNBpJmnOja/FpXdncPS363uMJwYnS0n9</TableCell>
                   <TableCell>
                     {"w92OGcwLCmcTpJ6eRjQquRSA/Os+f9MB74CBSEM/R0c="
@@ -62,7 +51,7 @@ export default function AccountTable(props) {
                       .map((c) => "*")
                       .join("")}
                   </TableCell>
-                  <TableCell>Tài khoản cấp 2 của tôi</TableCell>
+                  <TableCell>Tài khoản trường cấp 2 của tôi</TableCell>
                 </TableRow>
               </TableBody>
             </Table>
