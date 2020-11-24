@@ -9,20 +9,17 @@ import { getToken } from "src/utils/mng-token";
 import { setProfile } from "./redux";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    position: "relative",
-  },
+  root: {},
   head: {
-    position: "absolute",
     width: "95%",
-    left: "50%",
-    transform: "translateX(-50%)",
-    zIndex: 1,
+    margin: "auto",
     padding: theme.spacing(2.5, 2),
     backgroundColor: theme.palette.primary.main,
     color: "white",
+    // this bring head foreground
+    position: "relative",
   },
-  body: { position: "absolute", width: "100%", top: "64px" },
+  body: { width: "100%", marginTop: "-32px" },
   box: {
     padding: theme.spacing(8, 3, 3, 3),
     // textAlign: "right",
