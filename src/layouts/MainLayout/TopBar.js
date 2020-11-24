@@ -3,7 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
-import Logo from "src/utils/Logo";
+import Logo from "src/shared/Logo";
 
 const useStyles = makeStyles({
   root: {},

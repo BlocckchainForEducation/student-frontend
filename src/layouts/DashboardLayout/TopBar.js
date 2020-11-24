@@ -6,7 +6,7 @@ import { AppBar, Badge, Box, Hidden, IconButton, Toolbar, makeStyles } from "@ma
 import MenuIcon from "@material-ui/icons/Menu";
 import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
 import InputIcon from "@material-ui/icons/Input";
-import Logo from "src/utils/Logo";
+import Logo from "src/shared/Logo";
 
 const useStyles = makeStyles(() => ({
   root: {},
