@@ -7,6 +7,7 @@ import SignUpView from "src/views/SignUp";
 import SignInView from "src/views/SignIn";
 import { getToken } from "./utils/mng-token";
 import StudentProfile from "./views/StudentProfile";
+import Test from "./Test";
 
 const routes = [
   {
@@ -17,6 +18,7 @@ const routes = [
       { path: "*", element: <Navigate to="/404" /> },
     ],
   },
+  { path: "test", element: <Test /> },
   {
     path: "/",
     element: <MainLayout />,
