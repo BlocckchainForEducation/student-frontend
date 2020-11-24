@@ -25,10 +25,13 @@ const useStyles = makeStyles((theme) => ({
   },
   body: { position: "absolute", width: "100%", top: "64px" },
   box: {
-    padding: theme.spacing(3),
-    paddingTop: theme.spacing(8),
+    padding: theme.spacing(8, 3, 3, 3),
+    // textAlign: "right",
     "& > *": {
       marginBottom: theme.spacing(3),
+      "&:last-child": {
+        marginBottom: 0,
+      },
     },
   },
 }));
@@ -71,8 +74,12 @@ export default function ProfileForm() {
   return (
     <Box className={cls.root}>
       <Paper className={cls.head}>
-        <Typography variant="h4">Thông tin cá nhân</Typography>
-        <Typography variant="subtitle1">Chỉnh sửa lại thông tin cá nhân (nếu cần)</Typography>
+        <Typography variant="h3" style={{ fontWeight: "400" }}>
+          Thông tin cá nhân
+        </Typography>
+        <Typography variant="subtitle1" style={{ fontWeight: "350" }}>
+          Chỉnh sửa lại thông tin cá nhân (nếu cần)
+        </Typography>
       </Paper>
       <Box className={cls.body}>
         <Paper>
@@ -200,9 +207,11 @@ export default function ProfileForm() {
                 ></TextField>
               </Grid>
             </Grid>
-            <Button color="primary" variant="contained" onClick={hdSubmit}>
-              Cập nhật thông tin
-            </Button>
+            <Box textAlign="right">
+              <Button color="primary" variant="contained" onClick={hdSubmit}>
+                Cập nhật thông tin
+              </Button>
+            </Box>
           </Box>
         </Paper>
       </Box>
