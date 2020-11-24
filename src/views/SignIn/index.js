@@ -12,7 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, Navigate } from "react-router-dom";
 import { setLocalRole, setSessionRole } from "src/utils/mng-role";
 import { setLocalToken, setSessionToken } from "src/utils/mng-token";
 // import { getRedirect } from "src/utils/role-redirect";
@@ -21,7 +21,10 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link href="/homepage">B4E Website</Link> {new Date().getFullYear()}
+      <Link component={RouterLink} to="/">
+        B4E Website
+      </Link>{" "}
+      {new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -83,18 +86,18 @@ export default function SignIn() {
         setSessionToken(body.token);
         setSessionRole(body.role);
       }
-      // setRedirect(getRedirect());
+      setRedirect(<Navigate to="/nh" replace={true}></Navigate>);
     }
   }
   return (
     <Container component="main" maxWidth="xs">
-      {redirect ? redirect : null}
+      {redirect}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h3">
           Đăng nhập tài khoản
         </Typography>
         <form className={classes.form} noValidate>
@@ -143,14 +146,14 @@ export default function SignIn() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link componet={RouterLink} to="#" variant="body2">
                 Quên mật khẩu?
               </Link>
             </Grid>
             <Grid item>
-              <RouterLink className={classes.link} to="/dang-ki">
+              <Link component={RouterLink} to="/dang-ki">
                 {"Chưa có tài khoản? Đăng kí"}
-              </RouterLink>
+              </Link>
             </Grid>
           </Grid>
         </form>
