@@ -12,7 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import React, { useState } from "react";
-import { Link as RouterLink, Navigate } from "react-router-dom";
+import { Link as RouterLink, Navigate, useNavigate } from "react-router-dom";
 import { setLocalRole, setSessionRole } from "src/utils/mng-role";
 import { setLocalToken, setSessionToken } from "src/utils/mng-token";
 // import { getRedirect } from "src/utils/role-redirect";
@@ -64,7 +64,7 @@ export default function SignIn() {
     remember: true,
   });
   const [errors, setErrors] = useState(null);
-  const [redirect, setRedirect] = useState(null);
+  const navigate = useNavigate();
 
   async function hdSubmit(e) {
     e.preventDefault();
@@ -86,12 +86,11 @@ export default function SignIn() {
         setSessionToken(body.token);
         setSessionRole(body.role);
       }
-      setRedirect(<Navigate to="/nh"></Navigate>);
+      navigate("/nh/thong-tin-ca-nhan");
     }
   }
   return (
     <Container component="main" maxWidth="xs">
-      {redirect}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

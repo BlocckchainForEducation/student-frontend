@@ -11,7 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Alert } from "@material-ui/lab";
 import React, { useState } from "react";
-import { Link as RouterLink, Navigate } from "react-router-dom";
+import { Link as RouterLink, Navigate, useNavigate } from "react-router-dom";
 import { ROLE } from "src/utils/constance";
 import { setLocalRole } from "src/utils/mng-role";
 import { setLocalToken } from "src/utils/mng-token";
@@ -64,7 +64,7 @@ export default function SignUp() {
 
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(null);
-  const [redirect, setRedirect] = useState(null);
+  const navigate = useNavigate();
 
   async function hdSubmit(e) {
     e.preventDefault();
@@ -82,14 +82,13 @@ export default function SignUp() {
       setLocalRole(result.role);
       setErrors(null);
       setSuccess("Đăng kí tài khoản thành công!");
-      setTimeout(() => setRedirect(<Navigate to="/nh"></Navigate>), 1000);
+      setTimeout(() => navigate("/nh/thong-tin-ca-nhan"), 1000);
     }
   }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      {redirect}
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
