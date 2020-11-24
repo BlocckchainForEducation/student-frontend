@@ -5,8 +5,10 @@ import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import Logo from "src/shared/Logo";
+import { resetStore } from "../../store";
 import { clearRole } from "../../utils/mng-role";
 import { clearToken } from "../../utils/mng-token";
 
@@ -22,8 +24,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
   const classes = useStyles();
   const [notifications] = useState([]);
   const navigate = useNavigate();
-  console.log(navigate);
-
+  const dp = useDispatch();
   return (
     <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
       <Toolbar>
@@ -42,6 +43,7 @@ const TopBar = ({ className, onMobileNavOpen, ...rest }) => {
             onClick={(e) => {
               clearRole();
               clearToken();
+              dp(resetStore());
               navigate("/");
             }}
           >
