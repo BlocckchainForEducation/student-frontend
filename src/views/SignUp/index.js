@@ -1,33 +1,29 @@
-import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Link from "@material-ui/core/Link";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Alert } from "@material-ui/lab";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
-// import { getRedirect } from "src/utils/role-redirect";
 import { ROLE } from "src/utils/constance";
-import { setLocalToken } from "src/utils/mng-token";
 import { setLocalRole } from "src/utils/mng-role";
+import { setLocalToken } from "src/utils/mng-token";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link href="/homepage">B4E Website</Link> {new Date().getFullYear()}
+      <Link component={RouterLink} to="/">
+        B4E Website
+      </Link>{" "}
+      {new Date().getFullYear()}
       {"."}
     </Typography>
   );
@@ -54,9 +50,6 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  link: {
-    color: theme.palette.primary.main,
-  },
 }));
 
 export default function SignUp() {
@@ -71,7 +64,6 @@ export default function SignUp() {
 
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState(null);
-  const [redirect, setRedirect] = useState(null);
 
   async function hdSubmit(e) {
     e.preventDefault();
@@ -95,13 +87,12 @@ export default function SignUp() {
 
   return (
     <Container component="main" maxWidth="xs">
-      {redirect ? redirect : null}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h3">
           Đăng kí tài khoản
         </Typography>
         <div>
@@ -121,7 +112,10 @@ export default function SignUp() {
                 id="email"
                 label="Email"
                 value={state.email}
-                onChange={(e) => setState({ ...state, email: e.target.value })}
+                onChange={(e) => {
+                  setState({ ...state, email: e.target.value });
+                  setErrors(null);
+                }}
                 error={errors?.email}
                 helperText={errors?.email}
                 disabled={Boolean(success)}
@@ -136,7 +130,10 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 value={state.password}
-                onChange={(e) => setState({ ...state, password: e.target.value })}
+                onChange={(e) => {
+                  setState({ ...state, password: e.target.value });
+                  setErrors(null);
+                }}
                 error={errors?.password}
                 helperText={errors?.password}
                 disabled={Boolean(success)}
@@ -151,22 +148,14 @@ export default function SignUp() {
                 type="password"
                 id="rePassword"
                 value={state.repassword}
-                onChange={(e) => setState({ ...state, repassword: e.target.value })}
+                onChange={(e) => {
+                  setState({ ...state, repassword: e.target.value });
+                  setErrors(null);
+                }}
                 error={errors?.repassword}
                 helperText={errors?.repassword}
                 disabled={Boolean(success)}
               />
-            </Grid>
-            <Grid item xs={12}>
-              <FormControl component="fieldset" className="mt-3">
-                <FormLabel component="legend" className="mb-1">
-                  Loại tài khoản đăng kí:
-                </FormLabel>
-                <RadioGroup name="accounttype" value={state.role} onChange={(e) => setState({ ...state, role: e.target.value })}>
-                  <FormControlLabel value={ROLE.STUDENT} control={<Radio size="small" color="primary" />} label="Người học" className="mb-0" />
-                  <FormControlLabel value={ROLE.UNI_STAFF} control={<Radio size="small" color="primary" />} label="Trường học" />
-                </RadioGroup>
-              </FormControl>
             </Grid>
           </Grid>
           <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit} onClick={hdSubmit}>
@@ -174,9 +163,9 @@ export default function SignUp() {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <RouterLink className={classes.link} to="/dang-nhap">
+              <Link component={RouterLink} to="/dang-nhap">
                 Bạn đã có tài khoản rồi? Đăng nhập
-              </RouterLink>
+              </Link>
             </Grid>
           </Grid>
         </form>
