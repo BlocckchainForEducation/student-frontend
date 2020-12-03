@@ -19,16 +19,21 @@ export default function SelectionBar(props) {
 
   const dp = useDispatch();
   async function hdChangeSelection(e, selectedAccount) {
-    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKey=${selectedAccount.publicKey}`, {
-      headers: { "Content-Type": "application/json", Authorization: getToken() },
-    });
-
-    const result = await response.json();
-    if (!response.ok) {
-      console.log(result);
+    if (selectedAccount === null) {
+      dp(updateStateOnSelectionChange({ currentSelectedAccount: null, encryptedDataOfAccount: { certificate: null, subjectPointList: [] }, show: false }));
     } else {
-      result.currentSelectedAccount = selectedAccount;
-      dp(updateStateOnSelectionChange(result));
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKey=${selectedAccount.publicKey}`, {
+        headers: { "Content-Type": "application/json", Authorization: getToken() },
+      });
+
+      const result = await response.json();
+      if (!response.ok) {
+        console.log(result);
+      } else {
+        result.currentSelectedAccount = selectedAccount;
+        result.show = "encrypt";
+        dp(updateStateOnSelectionChange(result));
+      }
     }
   }
 
