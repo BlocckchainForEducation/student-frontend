@@ -6,21 +6,14 @@ import { getToken } from "src/utils/mng-token";
 import { updateImgSrc } from "./redux";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    // position: "relative",
-  },
+  root: {},
   avatar: {
     height: "128px",
     width: "128px",
     margin: "auto",
     position: "relative",
-    // left: 0,
-    // right: 0,
-    // zIndex: "1",
   },
   paper: {
-    // position: "absolute",
-    // top: "64px",
     marginTop: "-64px",
     width: "100%",
   },
@@ -35,9 +28,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AvatarBar() {
   const cls = useStyles();
-  const studentName = useSelector((state) => state.studentProfile.name);
-  const avatarSrc = useSelector((state) => state.studentProfile.imgSrc);
-  const description = useSelector((state) => state.studentProfile.description);
+  const studentName = useSelector((state) => state.studentProfileSlice.name);
+  const avatarSrc = useSelector((state) => state.studentProfileSlice.imgSrc);
+  const description = useSelector((state) => state.studentProfileSlice.description);
   const { enqueueSnackbar } = useSnackbar();
   const dp = useDispatch();
 
