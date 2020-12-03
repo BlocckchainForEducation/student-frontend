@@ -18,8 +18,8 @@ export default function SelectionBar(props) {
   const accounts = useSelector((state) => state.sawtoothAccountsSlice.accounts);
 
   const dp = useDispatch();
-  async function hdChangeSelection(e, selectedValue) {
-    let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKey=${selectedValue}`, {
+  async function hdChangeSelection(e, selectedAccount) {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKey=${selectedAccount.publicKey}`, {
       headers: { "Content-Type": "application/json", Authorization: getToken() },
     });
 
@@ -27,6 +27,7 @@ export default function SelectionBar(props) {
     if (!response.ok) {
       console.log(result);
     } else {
+      result.currentSelectedAccount = selectedAccount;
       dp(updateStateOnSelectionChange(result));
     }
   }
@@ -36,9 +37,9 @@ export default function SelectionBar(props) {
       <Autocomplete
         options={accounts}
         getOptionLabel={(account) => `${account.publicKey} - ${account.note}`}
-        renderInput={(params) => (
-          <TextField {...params} label="Chọn tài khoản" variant="outlined" value={currentSelectedAccount} onChange={hdChangeSelection} />
-        )}
+        renderInput={(params) => <TextField {...params} label="Chọn tài khoản" variant="outlined" />}
+        value={currentSelectedAccount}
+        onChange={hdChangeSelection}
       ></Autocomplete>
     </Paper>
   );
