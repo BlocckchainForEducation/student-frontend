@@ -42,7 +42,7 @@ export default function AccountTable(props) {
                   <TableRow>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{acc.publicKey}</TableCell>
-                    <TableCell>{acc.privateKey || "Không lưu"}</TableCell>
+                    <TableCell>{acc.privateKey !== "" ? "*".repeat(acc.privateKey.length) : "Không lưu"}</TableCell>
                     <TableCell>{acc.note}</TableCell>
                   </TableRow>
                 ))}

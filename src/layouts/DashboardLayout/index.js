@@ -43,6 +43,10 @@ const DashboardLayout = () => {
   const loading = useSelector((state) => state.studentProfileSlice.fetching);
   const dp = useDispatch();
 
+  useEffect(() => {
+    fetchStudentProfile();
+  }, []);
+
   async function fetchStudentProfile() {
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/profile`, {
@@ -58,32 +62,6 @@ const DashboardLayout = () => {
       alert(err);
     }
   }
-
-  // async function fetchSawtoothAccounts() {
-  //   try {
-  //     const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/sawtooth-accounts`, {
-  //       headers: { Authorization: getToken() },
-  //     });
-  //     if (!response.ok) {
-  //       alert(JSON.stringify(await response.json()));
-  //     } else {
-  //       const sawtoothAccounts = await response.json();
-  //       if (sawtoothAccounts) {
-  //         dp(setFetchedAccounts(sawtoothAccounts));
-  //       }
-  //       // setLoading(false);
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //     alert(err);
-  //   }
-  // }
-  // async function fetchCertificate() {}
-
-  useEffect(() => {
-    fetchStudentProfile();
-    // fetchSawtoothAccounts();
-  }, []);
 
   return (
     <>
