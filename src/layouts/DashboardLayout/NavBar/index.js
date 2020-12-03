@@ -84,7 +84,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
 
-  const user = useSelector((state) => state.studentProfile);
+  const user = useSelector((state) => state.studentProfileSlice);
 
   useEffect(() => {
     if (openMobile && onMobileClose) {

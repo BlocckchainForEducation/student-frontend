@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfileForm() {
   const cls = useStyles();
-  const studentProfile = useSelector((state) => state.studentProfile);
+  const studentProfile = useSelector((state) => state.studentProfileSlice);
   const [state, setState] = useState(studentProfile);
   const [lastUpdatedState, setCheckPointState] = useState(state);
   const { enqueueSnackbar } = useSnackbar();
@@ -51,7 +51,8 @@ export default function ProfileForm() {
       let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/profile`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: getToken() },
-        body: JSON.stringify(state),
+        // delete fetching field before send data to backend to avoid fail validate, delete imgSrc to avoid request too large error.
+        body: JSON.stringify({ ...state, fetching: undefined, imgSrc: undefined }),
       });
 
       if (!response.ok) {

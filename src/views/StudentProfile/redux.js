@@ -2,9 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const studentProfileSlice = createSlice({
   name: "studentProfileSlice",
-  initialState: {},
+  initialState: { fetching: true },
   reducers: {
-    setProfile: (state, action) => action.payload,
+    setProfile: (state, action) => {
+      state = action.payload;
+      state.fetching = false;
+      return state;
+    },
     updateImgSrc: (state, action) => {
       state.imgSrc = action.payload;
     },
