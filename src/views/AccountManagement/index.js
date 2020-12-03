@@ -24,7 +24,7 @@ export default function AccountManagement() {
 
   useEffect(() => {
     fetchSawtoothAccounts();
-  });
+  }, []);
 
   async function fetchSawtoothAccounts() {
     try {

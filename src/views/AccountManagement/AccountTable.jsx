@@ -39,10 +39,10 @@ export default function AccountTable(props) {
               </TableHead>
               <TableBody>
                 {sawtoothAccounts.map((acc, index) => (
-                  <TableRow>
+                  <TableRow key={index}>
                     <TableCell>{index + 1}</TableCell>
                     <TableCell>{acc.publicKey}</TableCell>
-                    <TableCell>{acc.privateKey !== "" ? "*".repeat(acc.privateKey.length) : "Không lưu"}</TableCell>
+                    <TableCell>{acc.privateKey ? "*".repeat(acc.privateKey.length) : "Không lưu"}</TableCell>
                     <TableCell>{acc.note}</TableCell>
                   </TableRow>
                 ))}
