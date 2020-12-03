@@ -17,7 +17,7 @@ const routes = [
     children: [
       { path: "thong-tin-ca-nhan", element: <StudentProfile /> },
       { path: "quan-ly-tai-khoan", element: <AccountManagement /> },
-      { path: "*", element: <Navigate to="/404" /> },
+      { path: "*", element: <Navigate to="/404" replace={true} /> },
     ],
   },
   { path: "test", element: <Test /> },

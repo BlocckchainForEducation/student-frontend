@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import studentProfileReducer from "./views/StudentProfile/redux";
+import studentSawtoothAccountReducer from "./views/AccountManagement/redux";
 
 export const resetStore = () => {
   return {
@@ -14,7 +15,7 @@ const rootReducer = (state, action) => {
   return appReducer(state, action);
 };
 
-const appReducer = combineReducers({ studentProfile: studentProfileReducer });
+const appReducer = combineReducers({ studentProfileSlice: studentProfileReducer, sawtoothAccountsSlice: studentSawtoothAccountReducer });
 
 export default configureStore({
   reducer: rootReducer,
