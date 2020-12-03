@@ -7,6 +7,7 @@ import { getToken } from "../../utils/mng-token";
 import { setProfile } from "../../views/StudentProfile/redux";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../shared/Loading";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,7 +76,9 @@ const DashboardLayout = () => {
             <div className={classes.wrapper}>
               <div className={classes.contentContainer}>
                 <div className={classes.content}>
-                  <Outlet />
+                  <PerfectScrollbar>
+                    <Outlet />
+                  </PerfectScrollbar>
                 </div>
               </div>
             </div>
