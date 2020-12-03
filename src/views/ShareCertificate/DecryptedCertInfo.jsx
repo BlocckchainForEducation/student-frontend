@@ -35,7 +35,7 @@ export default function DecryptedCertInfo(props) {
     <div>
       <Paper className={cls.root}>
         <Typography gutterBottom variant="h4">
-          Thong tin bang cap
+          Thông tin bằng cấp
         </Typography>
         <Divider></Divider>
         <Grid container>
