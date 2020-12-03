@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import studentProfileReducer from "./views/StudentProfile/redux";
 import studentSawtoothAccountReducer from "./views/AccountManagement/redux";
+import shareCertificateReducer from "./views/ShareCertificate/redux";
 
 export const resetStore = () => {
   return {
@@ -15,7 +16,11 @@ const rootReducer = (state, action) => {
   return appReducer(state, action);
 };
 
-const appReducer = combineReducers({ studentProfileSlice: studentProfileReducer, sawtoothAccountsSlice: studentSawtoothAccountReducer });
+const appReducer = combineReducers({
+  studentProfileSlice: studentProfileReducer,
+  sawtoothAccountsSlice: studentSawtoothAccountReducer,
+  shareCertificateSlice: shareCertificateReducer,
+});
 
 export default configureStore({
   reducer: rootReducer,
