@@ -1,4 +1,5 @@
 import { Box, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -15,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function AccountTable(props) {
   const cls = useStyles();
+  const sawtoothAccounts = useSelector((state) => state.sawtoothAccountsSlice.accounts);
 
   return (
     <div>
@@ -36,23 +38,14 @@ export default function AccountTable(props) {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell>1</TableCell>
-                  <TableCell>Aq7DZm5J4jBJNPMCSaEAg2qOY9icCYoigIBOLAN8WPiV</TableCell>
-                  <TableCell>Không lưu</TableCell>
-                  <TableCell>Tài khoản trường cấp 1 của tôi</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>2</TableCell>
-                  <TableCell>AnLpO4jxLPGUjNBpJmnOja/FpXdncPS363uMJwYnS0n9</TableCell>
-                  <TableCell>
-                    {"w92OGcwLCmcTpJ6eRjQquRSA/Os+f9MB74CBSEM/R0c="
-                      .split("")
-                      .map((c) => "*")
-                      .join("")}
-                  </TableCell>
-                  <TableCell>Tài khoản trường cấp 2 của tôi</TableCell>
-                </TableRow>
+                {sawtoothAccounts.map((acc, index) => (
+                  <TableRow>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{acc.publicKey}</TableCell>
+                    <TableCell>{acc.privateKey || "Không lưu"}</TableCell>
+                    <TableCell>{acc.note}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
