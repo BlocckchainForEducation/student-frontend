@@ -9,6 +9,7 @@ import { getToken } from "./utils/mng-token";
 import StudentProfile from "./views/StudentProfile";
 import Test from "./Test";
 import AccountManagement from "./views/AccountManagement";
+import ShareCertificate from "./views/ShareCertificate";
 
 const routes = [
   {
@@ -17,6 +18,7 @@ const routes = [
     children: [
       { path: "thong-tin-ca-nhan", element: <StudentProfile /> },
       { path: "quan-ly-tai-khoan", element: <AccountManagement /> },
+      { path: "chia-se-bang-cap", element: <ShareCertificate /> },
       { path: "*", element: <Navigate to="/404" replace={true} /> },
     ],
   },

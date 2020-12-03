@@ -1,4 +1,6 @@
 import { Box, makeStyles } from "@material-ui/core";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import View from "../../shared/View";
 import DecryptedCertInfo from "./DecryptedCertInfo";
 import DecryptedSubjectTable from "./DecryptedSubjectTable";
@@ -18,15 +20,25 @@ const useStyels = makeStyles((theme) => ({
 
 export default function ShareCertificate(props) {
   const cls = useStyels();
+  const show = useSelector((state) => state.shareCertificateSlice.show);
+
   return (
     <View title="Chia sẻ bằng cấp">
       <Box className={cls.root}>
         <SelectionBar></SelectionBar>
-        {/* <FunctionButton></FunctionButton> */}
-        {/* <EncryptedCertInfo></EncryptedCertInfo> */}
-        {/* <EncryptedSubjectTable></EncryptedSubjectTable> */}
-        <DecryptedCertInfo></DecryptedCertInfo>
-        <DecryptedSubjectTable></DecryptedSubjectTable>
+        {show === "encrypt" && (
+          <>
+            <FunctionButton></FunctionButton>
+            <EncryptedCertInfo></EncryptedCertInfo>
+            <EncryptedSubjectTable></EncryptedSubjectTable>
+          </>
+        )}
+        {show === "decrypt" && (
+          <>
+            <DecryptedCertInfo></DecryptedCertInfo>
+            <DecryptedSubjectTable></DecryptedSubjectTable>
+          </>
+        )}
       </Box>
     </View>
   );
