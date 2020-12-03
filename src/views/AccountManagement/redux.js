@@ -9,6 +9,7 @@ const sawtoothAccountsSlice = createSlice({
       state.accounts = action.payload;
     },
     addSawtoothAccount: (state, action) => {
+      console.log(action.payload);
       let newAcc = action.payload;
       if (newAcc.privateKey === "") {
         newAcc.privateKey = false;

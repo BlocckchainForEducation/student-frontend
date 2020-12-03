@@ -13,9 +13,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SelectionBar(props) {
   const cls = useStyles();
-  const currentSelectedAccount = useSelector((state) => state.shareCertificateSlice.currentSelectedAccount);
-
   const accounts = useSelector((state) => state.sawtoothAccountsSlice.accounts);
+  const currentSelectedAccount = useSelector((state) => state.shareCertificateSlice.currentSelectedAccount);
 
   const dp = useDispatch();
   async function hdChangeSelection(e, selectedAccount) {

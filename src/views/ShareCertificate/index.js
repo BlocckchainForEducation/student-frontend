@@ -6,7 +6,7 @@ import DecryptedCertInfo from "./DecryptedCertInfo";
 import DecryptedSubjectTable from "./DecryptedSubjectTable";
 import EncryptedCertInfo from "./EncryptedCertInfo";
 import EncryptedSubjectTable from "./EncryptedSubjectTable";
-import FunctionButton from "./FunctionButton";
+import AlertFetchResultBar from "./AlertFetchResultBar";
 import SelectionBar from "./SelectionBar";
 import SelectBar from "./SelectionBar";
 
@@ -28,7 +28,7 @@ export default function ShareCertificate(props) {
         <SelectionBar></SelectionBar>
         {show === "encrypt" && (
           <>
-            <FunctionButton></FunctionButton>
+            <AlertFetchResultBar></AlertFetchResultBar>
             <EncryptedCertInfo></EncryptedCertInfo>
             <EncryptedSubjectTable></EncryptedSubjectTable>
           </>

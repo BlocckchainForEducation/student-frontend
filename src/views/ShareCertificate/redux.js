@@ -7,7 +7,7 @@ const shareCertificateSlice = createSlice({
     updateStateOnSelectionChange: (state, action) => {
       state.currentSelectedAccount = action.payload.currentSelectedAccount;
       state.encryptedDataOfAccount = action.payload.encryptedDataOfAccount;
-      state.show = "encrypt";
+      state.show = action.payload.show;
     },
   },
 });
