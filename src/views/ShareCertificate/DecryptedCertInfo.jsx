@@ -56,8 +56,8 @@ function SimpleTable({ rows }) {
     <TableContainer>
       <Table size="small">
         <TableBody>
-          {Object.entries(rows).map((entry) => (
-            <TableRow>
+          {Object.entries(rows).map((entry, index) => (
+            <TableRow key={index}>
               <TableCell style={{ width: "50%" }}>{entry[0]}</TableCell>
               <TableCell>{entry[1]}</TableCell>
             </TableRow>

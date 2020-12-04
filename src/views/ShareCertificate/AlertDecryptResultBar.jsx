@@ -56,14 +56,9 @@ function TokenDialog({ token, setToken }) {
     <Dialog open={Boolean(token)} onClose={(e) => setToken(null)}>
       <DialogTitle>Token</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          <Box style={{ wordWrap: "break-word" }}>{token}</Box>
-        </DialogContentText>
+        <DialogContentText style={{ wordWrap: "break-word" }}>{token} </DialogContentText>
       </DialogContent>
       <DialogActions>
-        {/* <Button color="primary" onClick={(e) => setToken(null)}>
-          Cancel
-        </Button> */}
         <Button
           color="primary"
           onClick={(e) => {

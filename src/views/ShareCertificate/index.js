@@ -1,15 +1,13 @@
 import { Box, makeStyles } from "@material-ui/core";
-import { useState } from "react";
 import { useSelector } from "react-redux";
 import View from "../../shared/View";
+import AlertDecryptResultBar from "./AlertDecryptResultBar";
+import AlertFetchResultBar from "./AlertFetchResultBar";
 import DecryptedCertInfo from "./DecryptedCertInfo";
 import DecryptedSubjectTable from "./DecryptedSubjectTable";
 import EncryptedCertInfo from "./EncryptedCertInfo";
 import EncryptedSubjectTable from "./EncryptedSubjectTable";
-import AlertFetchResultBar from "./AlertFetchResultBar";
 import SelectionBar from "./SelectionBar";
-import SelectBar from "./SelectionBar";
-import AlertDecryptResultBar from "./AlertDecryptResultBar";
 
 const useStyels = makeStyles((theme) => ({
   root: {

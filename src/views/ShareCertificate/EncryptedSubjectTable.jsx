@@ -18,8 +18,8 @@ export default function EncryptedSubjectTable(props) {
         </Box>
         <Divider></Divider>
         <Box mt={2}>
-          {encryptedSubjectPointList.map((subject) => (
-            <Box>{subject}</Box>
+          {encryptedSubjectPointList.map((subject, index) => (
+            <Box key={index}>{subject}</Box>
           ))}
         </Box>
       </Paper>

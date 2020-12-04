@@ -45,6 +45,7 @@ export default function SelectionBar(props) {
         getOptionLabel={(account) => `${account.publicKey} - ${account.note}`}
         renderInput={(params) => <TextField {...params} label="Chọn tài khoản" variant="outlined" />}
         value={currentSelectedAccount}
+        getOptionSelected={(option, value) => option.publicKey === value.publicKey}
         onChange={hdChangeSelection}
       ></Autocomplete>
     </Paper>
