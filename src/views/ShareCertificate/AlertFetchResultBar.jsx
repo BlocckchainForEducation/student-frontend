@@ -1,5 +1,6 @@
 import { Box, Button, makeStyles, Paper } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "../../utils/mng-token";
 import { updateDecryptedState } from "./redux";
@@ -18,17 +19,18 @@ export default function AlertFetchResultBar(props) {
   const selectedAccount = useSelector((state) => state.shareCertificateSlice.currentSelectedAccount);
   const encryptData = useSelector((state) => state.shareCertificateSlice.encryptedDataOfAccount);
   const dp = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   async function hdClick() {
     let privateKey = selectedAccount.privateKey;
-
-    // if user do not save the private key for that account
     if (!privateKey) {
+      enqueueSnackbar("Hãy mở ví và chọn tài khoản!", { variant: "info", anchorOrigin: { vertical: "top", horizontal: "center" } });
       const result = await askPrivateKeyFromWallet();
       if (!result.ok) {
-        alert("Bạn cần cung cấp private key để có thể giải mã!");
+        enqueueSnackbar("Bạn cần cung cấp private key để có thể giải mã!", { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
         return;
       } else {
+        enqueueSnackbar("Đã nhận được private key từ ví!", { variant: "success", anchorOrigin: { vertical: "top", horizontal: "center" } });
         privateKey = result.privateKey;
       }
     }
@@ -45,9 +47,22 @@ export default function AlertFetchResultBar(props) {
       dp(updateDecryptedState(result));
     }
   }
-  // TODO: ask private from wallet
+
   async function askPrivateKeyFromWallet() {
-    return Promise.resolve({ ok: true, privateKey: "asdf" });
+    return new Promise((resolve, reject) => {
+      window.postMessage({ type: "SIGN_REQUEST" }, "*");
+      window.addEventListener("message", function (event) {
+        if (event.data.type === "SIGN_RESPONSE") {
+          if (event.data.accept) {
+            const privKeyBase64 = event.data.account.privateKey;
+            const privKeyHex = Buffer.from(privKeyBase64, "base64").toString("hex");
+            return resolve({ ok: true, privateKey: privKeyHex });
+          } else {
+            return resolve({ ok: false });
+          }
+        }
+      });
+    });
   }
 
   return (
