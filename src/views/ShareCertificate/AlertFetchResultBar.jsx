@@ -51,21 +51,19 @@ export default function AlertFetchResultBar(props) {
   }
 
   return (
-    <div>
-      <Paper className={cls.root}>
-        <Box display="flex" alignItems="center">
-          <Box flexGrow={1}>
-            <Alert severity="success">
-              <AlertTitle>Lấy dữ liệu bản mã thành công!</AlertTitle>
-            </Alert>
-          </Box>
-          <Box pl={2} flexShrink={0}>
-            <Button variant="contained" color="primary" onClick={hdClick}>
-              Giải mã
-            </Button>
-          </Box>
+    <Paper className={cls.root}>
+      <Box display="flex" alignItems="center">
+        <Box flexGrow={1}>
+          <Alert severity="success">
+            <AlertTitle>Lấy dữ liệu bản mã thành công!</AlertTitle>
+          </Alert>
         </Box>
-      </Paper>
-    </div>
+        <Box pl={2} flexShrink={0}>
+          <Button variant="contained" color="primary" onClick={hdClick}>
+            Giải mã
+          </Button>
+        </Box>
+      </Box>
+    </Paper>
   );
 }

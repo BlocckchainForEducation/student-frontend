@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import View from "../../shared/View";
 import { getToken } from "../../utils/mng-token";
 import AccountTable from "./AccountTable";
-import AddAccountByWallet from "./AddAccountByWallet";
-import AddAccountForm from "./AddAccountForm";
+import AddAccount from "./AddAccount";
 import { setFetchedAccounts } from "./redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -48,8 +47,7 @@ export default function AccountManagement() {
       {loading ? null : (
         <Box className={cls.root}>
           <AccountTable></AccountTable>
-          <AddAccountForm></AddAccountForm>
-          <AddAccountByWallet></AddAccountByWallet>
+          <AddAccount></AddAccount>
         </Box>
       )}
     </View>

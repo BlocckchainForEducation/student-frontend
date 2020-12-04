@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@material-ui/core";
+import { Divider, Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
