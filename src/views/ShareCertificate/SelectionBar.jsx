@@ -15,8 +15,8 @@ export default function SelectionBar(props) {
   const cls = useStyles();
   const accounts = useSelector((state) => state.sawtoothAccountsSlice.accounts);
   const currentSelectedAccount = useSelector((state) => state.shareCertificateSlice.currentSelectedAccount);
-
   const dp = useDispatch();
+
   async function hdChangeSelection(e, selectedAccount) {
     if (selectedAccount === null) {
       const defaultState = { currentSelectedAccount: null, encryptedDataOfAccount: { certificate: null, subjectPointList: [] }, show: "none" };
@@ -40,6 +40,7 @@ export default function SelectionBar(props) {
   return (
     <Paper className={cls.root}>
       <Autocomplete
+        size="small"
         options={accounts}
         getOptionLabel={(account) => `${account.publicKey} - ${account.note}`}
         renderInput={(params) => <TextField {...params} label="Chọn tài khoản" variant="outlined" />}

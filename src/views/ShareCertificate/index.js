@@ -9,6 +9,7 @@ import EncryptedSubjectTable from "./EncryptedSubjectTable";
 import AlertFetchResultBar from "./AlertFetchResultBar";
 import SelectionBar from "./SelectionBar";
 import SelectBar from "./SelectionBar";
+import AlertDecryptResultBar from "./AlertDecryptResultBar";
 
 const useStyels = makeStyles((theme) => ({
   root: {
@@ -35,6 +36,7 @@ export default function ShareCertificate(props) {
         )}
         {show === "decrypt" && (
           <>
+            <AlertDecryptResultBar></AlertDecryptResultBar>
             <DecryptedCertInfo></DecryptedCertInfo>
             <DecryptedSubjectTable></DecryptedSubjectTable>
           </>
