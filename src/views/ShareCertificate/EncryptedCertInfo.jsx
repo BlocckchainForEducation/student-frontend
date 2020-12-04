@@ -17,7 +17,9 @@ export default function EncryptedCertInfo(props) {
           <Typography variant="h4">Thông tin bằng cấp (dạng mã hóa)</Typography>
         </Box>
         <Divider></Divider>
-        <Box mt={2}>{encryptedCertData}</Box>
+        <Box mt={2} style={{ wordWrap: "break-word" }}>
+          {encryptedCertData}
+        </Box>
       </Paper>
     </div>
   );

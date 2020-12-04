@@ -7,25 +7,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// const certPart1 = {
-//   "Họ và tên": "Nguyễn Văn An",
-//   "Ngày sinh": "01/01/1998",
-//   "Nơi sinh": "Từ Sơn, Bắc Ninh",
-//   "Giới tính": "Nam",
-//   "Dân tộc": "Kinh",
-//   "Học sinh trường": "Trung học cơ sở Hương Mạc I",
-//   "Năm tốt nghiệp": "2016",
-// };
-
-// const certPart2 = {
-//   "Xếp loại tốt nghiệp": "Khá",
-//   "Hình thức đào tạo": "Chính quy",
-//   "Số hiệu": "A09050634",
-//   "Số vào sổ cấp bằng": "185",
-//   "Trưởng phòng GD&ĐT": "Nguyễn Văn Bình",
-//   Txid: "2443d2798645516f6d985347ba456ce6da416063952565d0a33d0d2009ee7a3f".substr(0, 20),
-// };
-
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
   const certificate = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.certificate);
@@ -89,3 +70,22 @@ function separateCertificate(cert) {
   };
   return [certPart1, certPart2];
 }
+
+// const certPart1 = {
+//   "Họ và tên": "Nguyễn Văn An",
+//   "Ngày sinh": "01/01/1998",
+//   "Nơi sinh": "Từ Sơn, Bắc Ninh",
+//   "Giới tính": "Nam",
+//   "Dân tộc": "Kinh",
+//   "Học sinh trường": "Trung học cơ sở Hương Mạc I",
+//   "Năm tốt nghiệp": "2016",
+// };
+
+// const certPart2 = {
+//   "Xếp loại tốt nghiệp": "Khá",
+//   "Hình thức đào tạo": "Chính quy",
+//   "Số hiệu": "A09050634",
+//   "Số vào sổ cấp bằng": "185",
+//   "Trưởng phòng GD&ĐT": "Nguyễn Văn Bình",
+//   Txid: "2443d2798645516f6d985347ba456ce6da416063952565d0a33d0d2009ee7a3f".substr(0, 20),
+// };
