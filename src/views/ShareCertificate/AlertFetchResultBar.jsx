@@ -2,7 +2,7 @@ import { Box, Button, makeStyles, Paper } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "../../utils/mng-token";
-import { updateStateWhenDecryptedData } from "./redux";
+import { updateDecryptedState } from "./redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,10 +42,10 @@ export default function AlertFetchResultBar(props) {
     if (!response.ok) {
       console.log(result);
     } else {
-      dp(updateStateWhenDecryptedData(result));
+      dp(updateDecryptedState(result));
     }
   }
-
+  // TODO: ask private from wallet
   async function askPrivateKeyFromWallet() {
     return Promise.resolve({ ok: true, privateKey: "asdf" });
   }

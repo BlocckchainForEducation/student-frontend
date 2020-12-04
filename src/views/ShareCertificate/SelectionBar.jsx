@@ -1,9 +1,9 @@
-import { Button, makeStyles, Paper, Typography } from "@material-ui/core";
+import { makeStyles, Paper } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "../../utils/mng-token";
-import { updateStateWhenSelectionChange } from "./redux";
+import { resetState, updateEncryptedState } from "./redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,8 +19,7 @@ export default function SelectionBar(props) {
 
   async function hdChangeSelection(e, selectedAccount) {
     if (selectedAccount === null) {
-      const defaultState = { currentSelectedAccount: null, encryptedDataOfAccount: { certificate: null, subjectPointList: [] }, show: "none" };
-      dp(updateStateWhenSelectionChange(defaultState));
+      dp(resetState());
     } else {
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKey=${selectedAccount.publicKey}`, {
         headers: { "Content-Type": "application/json", Authorization: getToken() },
@@ -32,7 +31,7 @@ export default function SelectionBar(props) {
       } else {
         result.currentSelectedAccount = selectedAccount;
         result.show = "encrypt";
-        dp(updateStateWhenSelectionChange(result));
+        dp(updateEncryptedState(result));
       }
     }
   }
@@ -41,9 +40,9 @@ export default function SelectionBar(props) {
     <Paper className={cls.root}>
       <Autocomplete
         size="small"
+        renderInput={(params) => <TextField {...params} label="Chọn tài khoản" variant="outlined" />}
         options={accounts}
         getOptionLabel={(account) => `${account.publicKey} - ${account.note}`}
-        renderInput={(params) => <TextField {...params} label="Chọn tài khoản" variant="outlined" />}
         value={currentSelectedAccount}
         getOptionSelected={(option, value) => option.publicKey === value.publicKey}
         onChange={hdChangeSelection}
