@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid, makeStyles, Paper, TextField, Typography } from "@material-ui/core";
+import { Box, Button, Grid, makeStyles, Paper, TextField, Typography } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -28,6 +28,10 @@ export default function AddAccount(props) {
   async function hdAddAccount(e) {
     try {
       e.preventDefault();
+      if (formState.publicKey === "") {
+        enqueueSnackbar("Public key is require!", { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
+        return;
+      }
 
       let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/sawtooth-accounts`, {
         method: "POST",
@@ -57,7 +61,7 @@ export default function AddAccount(props) {
         Thêm tài khoản
       </Typography>
 
-      <Box p={2}>
+      <Box px={2} py={3}>
         <Typography variant="h5" className={cls.subtitle}>
           Thêm tài khoản bằng public/private key
         </Typography>
@@ -100,12 +104,12 @@ export default function AddAccount(props) {
         </Grid>
       </Box>
 
-      <Box my={2} p={2} display="flex" justifyContent="space-between">
+      {/* <Box my={2} p={2} display="flex" justifyContent="space-between">
         <Typography variant="h5">Hoặc sử dụng ví B4E Wallet để chọn tài khoản muốn thêm</Typography>
         <Button variant="contained" color="primary">
           Sử dụng ví
         </Button>
-      </Box>
+      </Box> */}
     </Paper>
   );
 }

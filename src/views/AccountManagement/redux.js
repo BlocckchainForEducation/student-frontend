@@ -9,15 +9,17 @@ const sawtoothAccountsSlice = createSlice({
       state.accounts = action.payload;
     },
     addSawtoothAccount: (state, action) => {
-      console.log(action.payload);
       let newAcc = action.payload;
       if (newAcc.privateKey === "") {
         newAcc.privateKey = false;
       }
       state.accounts.push(newAcc);
     },
+    deleteSawtoothAccount: (state, action) => {
+      state.accounts = state.accounts.filter((acc) => acc.publicKey !== action.payload.publicKey);
+    },
   },
 });
 
 export default sawtoothAccountsSlice.reducer;
-export const { setFetchedAccounts, addSawtoothAccount } = sawtoothAccountsSlice.actions;
+export const { setFetchedAccounts, addSawtoothAccount, deleteSawtoothAccount } = sawtoothAccountsSlice.actions;
