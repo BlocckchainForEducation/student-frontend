@@ -1,42 +1,52 @@
-import { Divider, Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
+import { Box, Divider, Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import CheckIcon from "@material-ui/icons/Check";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(0, 2, 2, 2),
   },
 }));
 
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
-  const certificate = useSelector((state) => {
-    const versions = state.shareCertificateSlice.decryptedDataOfAccount.certificate.versions;
-    if (versions === null) {
-      return "Chưa có bằng cấp!";
-    }
-    versions.sort((a, b) => b.timestamp - a.timestamp);
-    return versions[0].plain;
-  });
-  console.log(certificate);
-  const [certPart1, certPart2] = separateCertificate(certificate);
+  const versions = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.certificate.versions);
 
   return (
     <div>
       <Paper className={cls.root}>
-        <Typography gutterBottom variant="h4">
-          Thông tin bằng cấp
-        </Typography>
-        <Divider></Divider>
-        <Grid container>
-          <Grid item sm={12} md={6}>
-            <SimpleTable rows={certPart1}></SimpleTable>
-          </Grid>
-          <Grid item sm={12} md={6}>
-            <SimpleTable rows={certPart2}></SimpleTable>
-          </Grid>
-        </Grid>
+        {versions === null && (
+          <Typography gutterBottom variant="h4">
+            Chưa có bằng cấp!
+          </Typography>
+        )}
+        {versions !== null && <CertTable cert={versions[0]}></CertTable>}
       </Paper>
     </div>
+  );
+}
+
+function CertTable({ cert }) {
+  const plain = cert.plain;
+  const [certPart1, certPart2] = separateCertificate(plain);
+  return (
+    <>
+      <Box pt={2} pb={1} display="flex" justifyContent="space-between" alignItems="center">
+        <Typography variant="h4">Thông tin bằng cấp</Typography>
+        {cert.active && <CheckIcon color="primary" size="1rem"></CheckIcon>}
+        {!cert.active && <ErrorOutlineIcon color="secondary" size="1rem"></ErrorOutlineIcon>}
+      </Box>
+      <Divider></Divider>
+      <Grid container>
+        <Grid item sm={12} md={6}>
+          <SimpleTable rows={certPart1}></SimpleTable>
+        </Grid>
+        <Grid item sm={12} md={6}>
+          <SimpleTable rows={certPart2}></SimpleTable>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 

@@ -14,7 +14,7 @@ export default function EncryptedCertInfo(props) {
     if (versions === null) {
       return "Chưa có bằng cấp!";
     }
-    versions.sort((a, b) => b.timestamp - a.timestamp);
+    // backend already sort the arrays
     return versions[0].cipher;
   });
   return (

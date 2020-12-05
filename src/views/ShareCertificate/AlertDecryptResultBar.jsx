@@ -21,6 +21,10 @@ export default function AlertDecryptResultBar(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   async function hdClick() {
+    if (!decryptedData.certificate.versions[0].active) {
+      enqueueSnackbar("Không thể chia sẻ bằng cấp đã bị thu hồi!", { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
+      return;
+    }
     const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/gen-token`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: getToken() },
