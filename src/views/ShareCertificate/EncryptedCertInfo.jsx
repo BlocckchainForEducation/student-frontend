@@ -1,4 +1,4 @@
-import { Box, Button, Divider, makeStyles, Paper, Typography } from "@material-ui/core";
+import { Box, Divider, makeStyles, Paper, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EncryptedCertInfo(props) {
   const cls = useStyles();
-  const encryptedCertData = useSelector((state) => state.shareCertificateSlice.encryptedDataOfAccount.certificate);
+  const cipher = useSelector((state) => state.shareCertificateSlice.encryptedDataOfAccount.certificate.cipher);
   return (
     <div>
       <Paper className={cls.root}>
@@ -18,7 +18,7 @@ export default function EncryptedCertInfo(props) {
         </Box>
         <Divider></Divider>
         <Box mt={2} style={{ wordWrap: "break-word" }}>
-          {encryptedCertData}
+          {cipher}
         </Box>
       </Paper>
     </div>

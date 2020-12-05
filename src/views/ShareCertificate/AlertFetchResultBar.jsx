@@ -22,8 +22,8 @@ export default function AlertFetchResultBar(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   async function hdClick() {
-    let privateKey = selectedAccount.privateKey;
-    if (!privateKey) {
+    let privateKeyBase64 = selectedAccount.privateKey;
+    if (!privateKeyBase64) {
       enqueueSnackbar("Hãy mở ví và chọn tài khoản!", { variant: "info", anchorOrigin: { vertical: "top", horizontal: "center" } });
       const result = await askPrivateKeyFromWallet();
       if (!result.ok) {
@@ -31,19 +31,25 @@ export default function AlertFetchResultBar(props) {
         return;
       } else {
         enqueueSnackbar("Đã nhận được private key từ ví!", { variant: "success", anchorOrigin: { vertical: "top", horizontal: "center" } });
-        privateKey = result.privateKey;
+        privateKeyBase64 = result.privateKeyBase64;
       }
     }
-
+    const privateKeyHex = Buffer.from(privateKeyBase64, "base64").toString("hex");
     const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/decrypt-data`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: getToken() },
-      body: JSON.stringify({ encryptData, privateKey }),
+      body: JSON.stringify({ encryptData, privateKeyHex }),
     });
     const result = await response.json();
     if (!response.ok) {
       console.log(result);
     } else {
+      // result:
+      // {
+      //   publicKeyHex: "",
+      //   certificate: { plain: {}, blockid: "", txid: "", address: "" },
+      //   subjects: [{ plain: {}, blockid: "", txid: "", address: "" }, {}],
+      // },
       dp(updateDecryptedState(result));
     }
   }
@@ -54,9 +60,8 @@ export default function AlertFetchResultBar(props) {
       window.addEventListener("message", function (event) {
         if (event.data.type === "SIGN_RESPONSE") {
           if (event.data.accept) {
-            const privKeyBase64 = event.data.account.privateKey;
-            const privKeyHex = Buffer.from(privKeyBase64, "base64").toString("hex");
-            return resolve({ ok: true, privateKey: privKeyHex });
+            const privateKeyBase64 = event.data.account.privateKey;
+            return resolve({ ok: true, privateKeyBase64 });
           } else {
             return resolve({ ok: false });
           }

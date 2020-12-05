@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
-  const certificate = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.certificate);
+  const certificate = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.certificate.plain);
   const [certPart1, certPart2] = separateCertificate(certificate);
 
   return (

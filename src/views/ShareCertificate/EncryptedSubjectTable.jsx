@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EncryptedSubjectTable(props) {
   const cls = useStyles();
-  const encryptedSubjectPointList = useSelector((state) => state.shareCertificateSlice.encryptedDataOfAccount.subjectPointList);
+  const subjects = useSelector((state) => state.shareCertificateSlice.encryptedDataOfAccount.subjects);
   return (
     <div>
       <Paper className={cls.root}>
@@ -18,8 +18,8 @@ export default function EncryptedSubjectTable(props) {
         </Box>
         <Divider></Divider>
         <Box mt={2}>
-          {encryptedSubjectPointList.map((subject, index) => (
-            <Box key={index}>{subject}</Box>
+          {subjects.map((subject, index) => (
+            <Box key={index}>{subject.cipher}</Box>
           ))}
         </Box>
       </Paper>

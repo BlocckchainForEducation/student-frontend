@@ -2,11 +2,16 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const initState = {
   currentSelectedAccount: null,
-  encryptedDataOfAccount: { certificate: null, subjectPointList: [] },
   show: "none", // none, encrypt, decrypt
+  encryptedDataOfAccount: {
+    publicKeyHex: "",
+    certificate: { cipher: {}, blockid: "", txid: "", address: "" },
+    subjects: [{ cipher: {}, blockid: "", txid: "", address: "" }, {}],
+  },
   decryptedDataOfAccount: {
-    certificate: null,
-    subjectPointList: [],
+    publicKeyHex: "",
+    certificate: { plain: {}, blockid: "", txid: "", address: "" },
+    subjects: [{ plain: {}, blockid: "", txid: "", address: "" }, {}],
   },
 };
 
@@ -14,18 +19,17 @@ const shareCertificateSlice = createSlice({
   name: "shareCertificateSlice",
   initialState: initState,
   reducers: {
+    resetState: (state, action) => {
+      Object.assign(state, initState);
+    },
     updateEncryptedState: (state, action) => {
       state.currentSelectedAccount = action.payload.currentSelectedAccount;
-      state.encryptedDataOfAccount = action.payload.encryptedDataOfAccount;
       state.show = action.payload.show;
-    },
-    resetState: (state, action) => {
-      state = initState;
-      return state;
+      state.encryptedDataOfAccount = action.payload.encryptedDataOfAccount;
     },
     updateDecryptedState: (state, action) => {
-      state.decryptedDataOfAccount = action.payload.decrytedData;
       state.show = "decrypt";
+      state.decryptedDataOfAccount = action.payload;
     },
   },
 });

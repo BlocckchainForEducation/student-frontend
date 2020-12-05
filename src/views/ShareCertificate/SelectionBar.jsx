@@ -21,7 +21,8 @@ export default function SelectionBar(props) {
     if (selectedAccount === null) {
       dp(resetState());
     } else {
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKey=${selectedAccount.publicKey}`, {
+      const publicKeyHex = Buffer.from(selectedAccount.publicKey, "base64").toString("hex");
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKeyHex=${publicKeyHex}`, {
         headers: { "Content-Type": "application/json", Authorization: getToken() },
       });
 
@@ -29,9 +30,8 @@ export default function SelectionBar(props) {
       if (!response.ok) {
         console.log(result);
       } else {
-        result.currentSelectedAccount = selectedAccount;
-        result.show = "encrypt";
-        dp(updateEncryptedState(result));
+        // result: {publicKeyHex, certificate: {cipher, blockid, txid, address}, subjects: [{cipher, blockid, txid, address}, {}...]}
+        dp(updateEncryptedState({ currentSelectedAccount: selectedAccount, show: "encrypt", encryptedDataOfAccount: result }));
       }
     }
   }

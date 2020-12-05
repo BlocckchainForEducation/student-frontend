@@ -22,6 +22,7 @@ const routes = [
       { path: "*", element: <Navigate to="/404" replace={true} /> },
     ],
   },
+  // TODO: remove test on production env
   { path: "test", element: <Test /> },
   {
     path: "/",

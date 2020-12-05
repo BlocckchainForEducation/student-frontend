@@ -5,9 +5,8 @@ export const studentProfileSlice = createSlice({
   initialState: { fetching: true },
   reducers: {
     setProfile: (state, action) => {
-      state = action.payload;
+      Object.assign(state, action.payload);
       state.fetching = false;
-      return state;
     },
     updateImgSrc: (state, action) => {
       state.imgSrc = action.payload;

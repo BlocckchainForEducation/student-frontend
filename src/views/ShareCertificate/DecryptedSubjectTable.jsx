@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedSubjectTable(props) {
   const cls = useStyles();
-  const subjectPointList = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.subjectPointList);
+  const subjects = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.subjects);
 
   return (
     <div>
@@ -32,15 +32,15 @@ export default function DecryptedSubjectTable(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {subjectPointList.map((subject, index) => (
+              {subjects.map((subject, index) => (
                 <TableRow key={index}>
-                  <TableCell>{subject.semester}</TableCell>
-                  <TableCell>{subject.codename}</TableCell>
-                  <TableCell>{subject.name}</TableCell>
-                  <TableCell>{subject.halfSemesterPoint}</TableCell>
-                  <TableCell>{subject.finalSemesterPoint}</TableCell>
-                  <TableCell>{subject.rank}</TableCell>
-                  <TableCell>{subject.txid}</TableCell>
+                  <TableCell>{subject.plain.semester}</TableCell>
+                  <TableCell>{subject.plain.codename}</TableCell>
+                  <TableCell>{subject.plain.name}</TableCell>
+                  <TableCell>{subject.plain.halfSemesterPoint}</TableCell>
+                  <TableCell>{subject.plain.finalSemesterPoint}</TableCell>
+                  <TableCell>{subject.plain.rank}</TableCell>
+                  <TableCell>{subject.plain.txid}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
