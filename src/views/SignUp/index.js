@@ -12,7 +12,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Alert } from "@material-ui/lab";
 import React, { useState } from "react";
 import { Link as RouterLink, Navigate, useNavigate } from "react-router-dom";
-import { ROLE } from "src/utils/constance";
 import { setLocalRole } from "src/utils/mng-role";
 import { setLocalToken } from "src/utils/mng-token";
 
@@ -59,7 +58,6 @@ export default function SignUp() {
     email: "",
     password: "",
     repassword: "",
-    role: ROLE.STUDENT,
   });
 
   const [errors, setErrors] = useState({});
