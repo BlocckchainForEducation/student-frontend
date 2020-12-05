@@ -30,8 +30,8 @@ export default function SelectionBar(props) {
       if (!response.ok) {
         console.log(result);
       } else {
-        // result: {publicKeyHex, certificate: {cipher, blockid, txid, address}, subjects: [{cipher, blockid, txid, address}, {}...]}
-        dp(updateEncryptedState({ currentSelectedAccount: selectedAccount, show: "encrypt", encryptedDataOfAccount: result }));
+        // result: {publicKeyHex, certificate: {address, versions: [{txid, timestamp, active, cipher}] }, subjects: [{address, versions: [{txid, timestamp, active, cipher}, {}...] } ]}
+        dp(updateEncryptedState({ currentSelectedAccount: selectedAccount, encryptedDataOfAccount: result }));
       }
     }
   }

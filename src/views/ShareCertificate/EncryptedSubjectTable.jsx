@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Button, Divider, makeStyles, Paper, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
@@ -19,7 +20,11 @@ export default function EncryptedSubjectTable(props) {
         <Divider></Divider>
         <Box mt={2}>
           {subjects.map((subject, index) => (
-            <Box key={index}>{subject.cipher}</Box>
+            <React.Fragment key={index}>
+              {subject.versions.map((version, index) => (
+                <Box key={index}>{version.cipher}</Box>
+              ))}
+            </React.Fragment>
           ))}
         </Box>
       </Paper>

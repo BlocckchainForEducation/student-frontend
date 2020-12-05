@@ -5,13 +5,13 @@ const initState = {
   show: "none", // none, encrypt, decrypt
   encryptedDataOfAccount: {
     publicKeyHex: "",
-    certificate: { cipher: {}, blockid: "", txid: "", address: "" },
-    subjects: [{ cipher: {}, blockid: "", txid: "", address: "" }, {}],
+    certificate: { address: "", versions: [{ txid: "", timestamp: 1234, active: "", cipher: "" }] },
+    subjects: [{ address: "", versions: [{ txid: "", timestamp: 1234, active: "", cipher: "" }] }, {}],
   },
   decryptedDataOfAccount: {
     publicKeyHex: "",
-    certificate: { plain: {}, blockid: "", txid: "", address: "" },
-    subjects: [{ plain: {}, blockid: "", txid: "", address: "" }, {}],
+    certificate: { address: "", versions: [{ txid: "", timestamp: 1234, active: "", plain: "" }] },
+    subjects: [{ address: "", versions: [{ txid: "", timestamp: 1234, active: "", plain: "" }] }, {}],
   },
 };
 
@@ -23,8 +23,8 @@ const shareCertificateSlice = createSlice({
       Object.assign(state, initState);
     },
     updateEncryptedState: (state, action) => {
+      state.show = "encrypt";
       state.currentSelectedAccount = action.payload.currentSelectedAccount;
-      state.show = action.payload.show;
       state.encryptedDataOfAccount = action.payload.encryptedDataOfAccount;
     },
     updateDecryptedState: (state, action) => {

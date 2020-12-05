@@ -1,3 +1,4 @@
+import React from "react";
 import { Divider, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
@@ -33,15 +34,19 @@ export default function DecryptedSubjectTable(props) {
             </TableHead>
             <TableBody>
               {subjects.map((subject, index) => (
-                <TableRow key={index}>
-                  <TableCell>{subject.plain.semester}</TableCell>
-                  <TableCell>{subject.plain.codename}</TableCell>
-                  <TableCell>{subject.plain.name}</TableCell>
-                  <TableCell>{subject.plain.halfSemesterPoint}</TableCell>
-                  <TableCell>{subject.plain.finalSemesterPoint}</TableCell>
-                  <TableCell>{subject.plain.rank}</TableCell>
-                  <TableCell>{subject.plain.txid}</TableCell>
-                </TableRow>
+                <React.Fragment key={index}>
+                  {subject.versions.map((version, index) => (
+                    <TableRow key={index}>
+                      <TableCell>{version.plain.semester}</TableCell>
+                      <TableCell>{version.plain.codename}</TableCell>
+                      <TableCell>{version.plain.name}</TableCell>
+                      <TableCell>{version.plain.halfSemesterPoint}</TableCell>
+                      <TableCell>{version.plain.finalSemesterPoint}</TableCell>
+                      <TableCell>{version.plain.rank}</TableCell>
+                      <TableCell>{version.plain.txid}</TableCell>
+                    </TableRow>
+                  ))}
+                </React.Fragment>
               ))}
             </TableBody>
           </Table>

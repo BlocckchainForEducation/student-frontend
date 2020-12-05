@@ -44,12 +44,6 @@ export default function AlertFetchResultBar(props) {
     if (!response.ok) {
       console.log(result);
     } else {
-      // result:
-      // {
-      //   publicKeyHex: "",
-      //   certificate: { plain: {}, blockid: "", txid: "", address: "" },
-      //   subjects: [{ plain: {}, blockid: "", txid: "", address: "" }, {}],
-      // },
       dp(updateDecryptedState(result));
     }
   }

@@ -1,5 +1,6 @@
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, makeStyles, Paper } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { getToken } from "../../utils/mng-token";
@@ -17,6 +18,7 @@ export default function AlertDecryptResultBar(props) {
   const cls = useStyles();
   const decryptedData = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount);
   const [token, setToken] = useState(null);
+  const { enqueueSnackbar } = useSnackbar();
 
   async function hdClick() {
     const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/gen-token`, {
@@ -26,7 +28,7 @@ export default function AlertDecryptResultBar(props) {
     });
     const result = await response.json();
     if (!response.ok) {
-      console.log(result);
+      enqueueSnackbar("Something went wrong: " + JSON.stringify(result), { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
     } else {
       setToken(result.token);
     }

@@ -9,7 +9,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
-  const certificate = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.certificate.plain);
+  const certificate = useSelector((state) => {
+    const versions = state.shareCertificateSlice.decryptedDataOfAccount.certificate.versions;
+    if (versions === null) {
+      return "Chưa có bằng cấp!";
+    }
+    versions.sort((a, b) => b.timestamp - a.timestamp);
+    return versions[0].plain;
+  });
+  console.log(certificate);
   const [certPart1, certPart2] = separateCertificate(certificate);
 
   return (

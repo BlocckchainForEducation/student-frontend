@@ -9,7 +9,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EncryptedCertInfo(props) {
   const cls = useStyles();
-  const cipher = useSelector((state) => state.shareCertificateSlice.encryptedDataOfAccount.certificate.cipher);
+  const cipher = useSelector((state) => {
+    const versions = state.shareCertificateSlice.encryptedDataOfAccount.certificate.versions;
+    if (versions === null) {
+      return "Chưa có bằng cấp!";
+    }
+    versions.sort((a, b) => b.timestamp - a.timestamp);
+    return versions[0].cipher;
+  });
   return (
     <div>
       <Paper className={cls.root}>
