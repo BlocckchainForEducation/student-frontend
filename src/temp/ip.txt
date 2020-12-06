@@ -1,0 +1,4 @@
+1. Add loading when fetch encrypted data from blockchain
+2. Add Tooltip show cert state: active/revoked
+3. Allow user download token file
+4. Public & Private key hex instead of base64?

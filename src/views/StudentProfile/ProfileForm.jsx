@@ -58,7 +58,7 @@ export default function ProfileForm() {
         enqueueSnackbar("Something went wrong: " + JSON.stringify(error), { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
       } else {
         setCheckPointState(state);
-        dp(setProfile(state));
+        dp(setProfile({ ...state, imgSrc: studentProfile.imgSrc }));
         enqueueSnackbar("Cập nhật Profile thành công!", { variant: "success", anchorOrigin: { vertical: "bottom", horizontal: "center" } });
       }
     } catch (error) {
