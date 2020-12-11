@@ -22,7 +22,9 @@ export default function EncryptedSubjectTable(props) {
           {subjects.map((subject, index) => (
             <React.Fragment key={index}>
               {subject.versions.map((version, index) => (
-                <Box key={index}>{version.cipher}</Box>
+                <Box key={index} mt={2} style={{ wordWrap: "break-word" }}>
+                  {version.cipher}
+                </Box>
               ))}
             </React.Fragment>
           ))}
