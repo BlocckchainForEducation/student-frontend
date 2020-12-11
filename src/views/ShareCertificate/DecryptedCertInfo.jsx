@@ -1,4 +1,4 @@
-import { Box, Divider, Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from "@material-ui/core";
+import { Box, Divider, Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import CheckIcon from "@material-ui/icons/Check";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
@@ -34,8 +34,16 @@ function CertTable({ cert }) {
     <>
       <Box pt={2} pb={1} display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="h4">Thông tin bằng cấp</Typography>
-        {cert.active && <CheckIcon color="primary" size="1rem"></CheckIcon>}
-        {!cert.active && <ErrorOutlineIcon color="secondary" size="1rem"></ErrorOutlineIcon>}
+        {cert.active && (
+          <Tooltip title="Bằng cấp hợp lệ, sẵn sàng để chia sẻ">
+            <CheckIcon color="primary" size="1rem"></CheckIcon>
+          </Tooltip>
+        )}
+        {!cert.active && (
+          <Tooltip title="Bằng cấp đã bị thu hồi!">
+            <ErrorOutlineIcon color="secondary" size="1rem"></ErrorOutlineIcon>
+          </Tooltip>
+        )}
       </Box>
       <Divider></Divider>
       <Grid container>
