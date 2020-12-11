@@ -21,7 +21,7 @@ export default function SelectionBar(props) {
     if (selectedAccount === null) {
       dp(resetState());
     } else {
-      const publicKeyHex = Buffer.from(selectedAccount.publicKey, "base64").toString("hex");
+      const publicKeyHex = selectedAccount.publicKeyHex;
       const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKeyHex=${publicKeyHex}`, {
         headers: { "Content-Type": "application/json", Authorization: getToken() },
       });
@@ -42,9 +42,9 @@ export default function SelectionBar(props) {
         size="small"
         renderInput={(params) => <TextField {...params} label="Chọn tài khoản" variant="outlined" />}
         options={accounts}
-        getOptionLabel={(account) => `${account.publicKey} - ${account.note}`}
+        getOptionLabel={(account) => `${account.publicKeyHex.slice(0, 30) + "..." + account.publicKeyHex.slice(-30)} - ${account.note}`}
         value={currentSelectedAccount}
-        getOptionSelected={(option, value) => option.publicKey === value.publicKey}
+        getOptionSelected={(option, value) => option.publicKeyHex === value.publicKeyHex}
         onChange={hdChangeSelection}
       ></Autocomplete>
     </Paper>

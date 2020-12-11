@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
 export default function AddAccount(props) {
   const cls = useStyles();
   const [formState, setFormState] = useState({
-    publicKey: "",
-    privateKey: "",
+    publicKeyHex: "",
+    privateKeyHex: "",
     note: "",
   });
 
@@ -28,10 +28,11 @@ export default function AddAccount(props) {
   async function hdAddAccount(e) {
     try {
       e.preventDefault();
-      if (formState.publicKey === "") {
+      if (formState.publicKeyHex === "") {
         enqueueSnackbar("Public key is require!", { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
         return;
       }
+      // TODO: validate publicKeyHex, privateKeyHex(if exists)
 
       let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/sawtooth-accounts`, {
         method: "POST",
@@ -45,8 +46,8 @@ export default function AddAccount(props) {
       } else {
         dp(addSawtoothAccount(formState));
         setFormState({
-          publicKey: "",
-          privateKey: "",
+          publicKeyHex: "",
+          privateKeyHex: "",
           note: "",
         });
         enqueueSnackbar("Thêm tài khoản thành công!", { variant: "success", anchorOrigin: { vertical: "bottom", horizontal: "center" } });
@@ -71,8 +72,8 @@ export default function AddAccount(props) {
               label="Public key"
               InputLabelProps={{ shrink: true }}
               fullWidth
-              value={formState.publicKey}
-              onChange={(e) => setFormState({ ...formState, publicKey: e.target.value })}
+              value={formState.publicKeyHex}
+              onChange={(e) => setFormState({ ...formState, publicKeyHex: e.target.value })}
             ></TextField>
           </Grid>
           <Grid item xs={12} md={4}>
@@ -81,8 +82,8 @@ export default function AddAccount(props) {
               InputLabelProps={{ shrink: true }}
               InputProps={{ type: "password" }}
               fullWidth
-              value={formState.privateKey}
-              onChange={(e) => setFormState({ ...formState, privateKey: e.target.value })}
+              value={formState.privateKeyHex}
+              onChange={(e) => setFormState({ ...formState, privateKeyHex: e.target.value })}
             ></TextField>
           </Grid>
           <Grid item xs={12} md={2}>

@@ -20,17 +20,17 @@ export default function AccountTable(props) {
   const dp = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  async function hdDelete(publicKey) {
+  async function hdDelete(publicKeyHex) {
     let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/sawtooth-accounts`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json", Authorization: getToken() },
-      body: JSON.stringify({ publicKey }),
+      body: JSON.stringify({ publicKeyHex }),
     });
     const result = response.json();
     if (!response.ok) {
       enqueueSnackbar("Something went wrong: " + JSON.stringify(result), { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
     } else {
-      dp(deleteSawtoothAccount({ publicKey }));
+      dp(deleteSawtoothAccount({ publicKeyHex }));
       enqueueSnackbar("Xóa tài khoản thành công!", { variant: "success", anchorOrigin: { vertical: "bottom", horizontal: "center" } });
     }
   }
@@ -54,19 +54,22 @@ export default function AccountTable(props) {
               </TableRow>
             </TableHead>
             <TableBody>
-              {sawtoothAccounts.map((acc, index) => (
-                <TableRow key={index}>
-                  <TableCell>{index + 1}</TableCell>
-                  <TableCell>{acc.publicKey}</TableCell>
-                  <TableCell>{acc.privateKey ? "*".repeat(acc.privateKey.length) : "Không lưu"}</TableCell>
-                  <TableCell>{acc.note}</TableCell>
-                  <TableCell align="center">
-                    <IconButton onClick={(e) => hdDelete(acc.publicKey)}>
-                      <DeleteIcon></DeleteIcon>
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {sawtoothAccounts.map((acc, index) => {
+                const shortPublicKeyHex = acc.publicKeyHex.slice(0, 30) + "..." + acc.publicKeyHex.slice(-30);
+                return (
+                  <TableRow key={index}>
+                    <TableCell>{index + 1}</TableCell>
+                    <TableCell>{shortPublicKeyHex}</TableCell>
+                    <TableCell>{acc.privateKeyHex ? "*".repeat(acc.privateKeyHex.length) : "Không lưu"}</TableCell>
+                    <TableCell>{acc.note}</TableCell>
+                    <TableCell align="center">
+                      <IconButton onClick={(e) => hdDelete(acc.publicKeyHex)}>
+                        <DeleteIcon></DeleteIcon>
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>

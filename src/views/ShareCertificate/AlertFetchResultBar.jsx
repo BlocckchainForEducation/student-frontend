@@ -22,8 +22,8 @@ export default function AlertFetchResultBar(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   async function hdClick() {
-    let privateKeyBase64 = selectedAccount.privateKey;
-    if (!privateKeyBase64) {
+    let privateKeyHex = selectedAccount.privateKey;
+    if (!privateKeyHex) {
       enqueueSnackbar("Hãy mở ví và chọn tài khoản!", { variant: "info", anchorOrigin: { vertical: "top", horizontal: "center" } });
       const result = await askPrivateKeyFromWallet();
       if (!result.ok) {
@@ -31,10 +31,9 @@ export default function AlertFetchResultBar(props) {
         return;
       } else {
         enqueueSnackbar("Đã nhận được private key từ ví!", { variant: "success", anchorOrigin: { vertical: "top", horizontal: "center" } });
-        privateKeyBase64 = result.privateKeyBase64;
+        privateKeyHex = result.privateKeyHex;
       }
     }
-    const privateKeyHex = Buffer.from(privateKeyBase64, "base64").toString("hex");
     const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/decrypt-data`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: getToken() },
@@ -54,8 +53,7 @@ export default function AlertFetchResultBar(props) {
       window.addEventListener("message", function (event) {
         if (event.data.type === "SIGN_RESPONSE") {
           if (event.data.accept) {
-            const privateKeyBase64 = event.data.account.privateKey;
-            return resolve({ ok: true, privateKeyBase64 });
+            return resolve({ ok: true, privateKeyHex: event.data.account.privateKey });
           } else {
             return resolve({ ok: false });
           }
