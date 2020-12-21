@@ -11,17 +11,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
-  const versions = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.certificate.versions);
+  const versions = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount?.certificate?.versions);
 
   return (
     <div>
       <Paper className={cls.root}>
-        {versions === null && (
+        {!versions && (
           <Typography gutterBottom variant="h4">
             Chưa có bằng cấp!
           </Typography>
         )}
-        {versions !== null && <CertTable cert={versions[0]}></CertTable>}
+        {versions && versions[0] && <CertTable cert={versions[0]}></CertTable>}
       </Paper>
     </div>
   );

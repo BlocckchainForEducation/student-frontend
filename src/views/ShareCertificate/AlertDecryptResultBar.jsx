@@ -74,6 +74,9 @@ function TokenDialog({ token, setToken }) {
         >
           Copy
         </Button>
+        <Button color="primary" onClick={(e) => {}}>
+          Download
+        </Button>
       </DialogActions>
     </Dialog>
   );
