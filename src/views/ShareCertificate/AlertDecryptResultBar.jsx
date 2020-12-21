@@ -4,6 +4,7 @@ import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { getToken } from "../../utils/mng-token";
+import FileSaver from "file-saver";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +75,14 @@ function TokenDialog({ token, setToken }) {
         >
           Copy
         </Button>
-        <Button color="primary" onClick={(e) => {}}>
+        <Button
+          color="primary"
+          variant="outlined"
+          onClick={(e) => {
+            FileSaver.saveAs(token, "B4E-Certificate-Token.jwt");
+            setToken(null);
+          }}
+        >
           Download
         </Button>
       </DialogActions>

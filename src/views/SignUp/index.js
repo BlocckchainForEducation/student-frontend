@@ -91,7 +91,7 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h3">
-          Đăng kí tài khoản
+          Đăng kí tài khoản Người học
         </Typography>
         <div>
           {success ? (
