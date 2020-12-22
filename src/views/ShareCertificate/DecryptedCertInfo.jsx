@@ -17,9 +17,15 @@ export default function DecryptedCertInfo(props) {
     <div>
       <Paper className={cls.root}>
         {!versions && (
-          <Typography gutterBottom variant="h4">
-            Chưa có bằng cấp!
-          </Typography>
+          <>
+            <Box pt={2} pb={1}>
+              <Typography variant="h4" gutterBottom>
+                Thông tin bằng cấp
+              </Typography>
+              <Divider></Divider>
+              <Typography style={{ paddingTop: "8px" }}>Chưa có bằng cấp!</Typography>
+            </Box>
+          </>
         )}
         {versions && versions[0] && <CertTable cert={versions[0]}></CertTable>}
       </Paper>

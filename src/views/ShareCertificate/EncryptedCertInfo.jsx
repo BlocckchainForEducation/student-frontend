@@ -11,8 +11,8 @@ export default function EncryptedCertInfo(props) {
   const cls = useStyles();
   const cipher = useSelector((state) => {
     const versions = state.shareCertificateSlice.encryptedDataOfAccount.certificate.versions;
-    if (versions === null) {
-      return "Chưa có bằng cấp!";
+    if (!versions) {
+      return <Typography>Chưa có bằng cấp!</Typography>;
     }
     // backend already sort the arrays
     return versions[0].cipher;

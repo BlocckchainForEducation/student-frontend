@@ -47,11 +47,13 @@ export default function AlertDecryptResultBar(props) {
             <AlertTitle>Giải mã dữ liệu bản mã thành công!</AlertTitle>
           </Alert>
         </Box>
-        <Box pl={2} flexShrink={0}>
-          <Button variant="contained" color="primary" onClick={hdClick}>
-            Chia sẻ
-          </Button>
-        </Box>
+        {decryptedData.certificate && (
+          <Box pl={2} flexShrink={0}>
+            <Button variant="contained" color="primary" onClick={hdClick}>
+              Chia sẻ
+            </Button>
+          </Box>
+        )}
       </Box>
       <TokenDialog token={token} setToken={setToken}></TokenDialog>
     </Paper>
