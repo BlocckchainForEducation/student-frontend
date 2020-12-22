@@ -30,7 +30,7 @@ export default function AlertFetchResultBar(props) {
         enqueueSnackbar("Bạn cần cung cấp private key để có thể giải mã!", { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
         return;
       } else {
-        enqueueSnackbar("Đã nhận được private key từ ví!", { variant: "success", anchorOrigin: { vertical: "top", horizontal: "center" } });
+        // enqueueSnackbar("Đã nhận được private key từ ví!", { variant: "success", anchorOrigin: { vertical: "top", horizontal: "center" } });
         privateKeyHex = result.privateKeyHex;
       }
     }

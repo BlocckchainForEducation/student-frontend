@@ -77,9 +77,9 @@ function TokenDialog({ token, setToken }) {
         </Button>
         <Button
           color="primary"
-          variant="outlined"
           onClick={(e) => {
-            FileSaver.saveAs(token, "B4E-Certificate-Token.jwt");
+            var blob = new Blob([token], { type: "text/plain;charset=utf-8" });
+            FileSaver.saveAs(blob, "B4E-Certificate-Token.jwt");
             setToken(null);
           }}
         >
