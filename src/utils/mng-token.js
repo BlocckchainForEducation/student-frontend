@@ -1,8 +1,11 @@
-// TODO: save remeber too! -> when getToken or ClearToken, only clear proper token
-let remember;
+let remember = true;
 
 function setRemember(_remember) {
   remember = _remember;
+}
+
+function getRemember() {
+  return remember;
 }
 
 function setSessionToken(token) {
@@ -26,4 +29,4 @@ function clearToken() {
   }
 }
 
-export { setSessionToken, setLocalToken, getToken, clearToken, setRemember };
+export { setSessionToken, setLocalToken, getToken, clearToken, setRemember, getRemember };
