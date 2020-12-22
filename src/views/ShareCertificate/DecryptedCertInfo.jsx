@@ -1,7 +1,21 @@
-import { Box, Divider, Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Tooltip, Typography } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import {
+  Box,
+  Divider,
+  Grid,
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Tooltip,
+  Typography,
+} from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import { useSelector } from "react-redux";
+import { getLinkFromTxid } from "../../utils/utils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -11,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
-  const versions = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount?.certificate?.versions);
+  const versions = useSelector(
+    (state) =>
+      state.shareCertificateSlice.decryptedDataOfAccount?.certificate?.versions
+  );
 
   return (
     <div>
@@ -23,7 +40,9 @@ export default function DecryptedCertInfo(props) {
                 Thông tin bằng cấp
               </Typography>
               <Divider></Divider>
-              <Typography style={{ paddingTop: "8px" }}>Chưa có bằng cấp!</Typography>
+              <Typography style={{ paddingTop: "8px" }}>
+                Chưa có bằng cấp!
+              </Typography>
             </Box>
           </>
         )}
@@ -34,11 +53,18 @@ export default function DecryptedCertInfo(props) {
 }
 
 function CertTable({ cert }) {
+  console.log(cert);
   const plain = cert.plain;
-  const [certPart1, certPart2] = separateCertificate(plain);
+  const [certPart1, certPart2] = separateCertificate(plain, cert);
   return (
     <>
-      <Box pt={2} pb={1} display="flex" justifyContent="space-between" alignItems="center">
+      <Box
+        pt={2}
+        pb={1}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Typography variant="h4">Thông tin bằng cấp</Typography>
         {cert.active && (
           <Tooltip title="Bằng cấp hợp lệ, sẵn sàng để chia sẻ">
@@ -81,24 +107,26 @@ function SimpleTable({ rows }) {
   );
 }
 
-function separateCertificate(cert) {
+function separateCertificate(plain, cert) {
+  const link = getLinkFromTxid(cert.txid);
   let certPart1 = {
-    "Họ và tên": cert.name,
-    "Ngày sinh": cert.birthday,
-    "Giới tính": cert.gender,
-    Trường: cert.university,
-    "Ngành học": cert.faculty,
-    "Loại bằng": cert.degree,
-    "Năm tốt nghiệp": cert.gradyear,
+    "Họ và tên": plain.name,
+    "Ngày sinh": plain.birthday,
+    "Giới tính": plain.gender,
+    Trường: plain.university,
+    "Ngành học": plain.faculty,
+    "Loại bằng": plain.degree,
+    "Năm tốt nghiệp": plain.gradyear,
   };
   let certPart2 = {
-    "Xếp loại": cert.level,
-    "Hình thức đào tạo": cert.eduform,
-    "Nơi cấp": cert.issuelocation,
-    "Ngày cấp": cert.issuedate,
-    "Hiệu trưởng": cert.headmaster,
-    "Số hiệu": cert.regisno,
-    "Số hiệu vào sổ": cert.globalregisno,
+    "Xếp loại": plain.level,
+    "Hình thức đào tạo": plain.eduform,
+    "Nơi cấp": plain.issuelocation,
+    "Ngày cấp": plain.issuedate,
+    "Hiệu trưởng": plain.headmaster,
+    // "Số hiệu": plain.regisno,
+    "Số hiệu vào sổ": plain.globalregisno,
+    Txid: link,
   };
   return [certPart1, certPart2];
 }

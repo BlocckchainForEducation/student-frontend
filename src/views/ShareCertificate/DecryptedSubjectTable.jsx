@@ -1,6 +1,18 @@
+import {
+  Divider,
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@material-ui/core";
 import React from "react";
-import { Divider, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { getLinkFromTxid } from "src/utils/utils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,7 +22,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedSubjectTable(props) {
   const cls = useStyles();
-  const subjects = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount.subjects);
+  const subjects = useSelector(
+    (state) => state.shareCertificateSlice.decryptedDataOfAccount.subjects
+  );
 
   return (
     <div>
@@ -52,7 +66,8 @@ export default function DecryptedSubjectTable(props) {
                       {/* <TableCell>{version.plain.rank}</TableCell> */}
                       <TableCell>
                         {/* <Tooltip title={version.txid}>{version.txid.slice(0, 20) + "..." + version.txid.slice(-20)}</Tooltip> */}
-                        {version.txid.slice(0, 20) + "..." + version.txid.slice(-20)}
+                        {/* {version.txid.slice(0, 20) + "..." + version.txid.slice(-20)} */}
+                        {getLinkFromTxid(version.txid)}
                       </TableCell>
                     </TableRow>
                   ))}
