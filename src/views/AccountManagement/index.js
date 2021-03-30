@@ -27,7 +27,7 @@ export default function AccountManagement() {
 
   async function fetchSawtoothAccounts() {
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/sawtooth-accounts`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/sawtooth-accounts`, {
         headers: { Authorization: getToken() },
       });
       if (!response.ok) {

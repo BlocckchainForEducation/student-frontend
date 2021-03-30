@@ -23,17 +23,23 @@ export default function AlertDecryptResultBar(props) {
 
   async function hdClick() {
     if (!decryptedData.certificate.versions[0].active) {
-      enqueueSnackbar("Không thể chia sẻ bằng cấp đã bị thu hồi!", { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
+      enqueueSnackbar("Không thể chia sẻ bằng cấp đã bị thu hồi!", {
+        variant: "error",
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      });
       return;
     }
-    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/gen-token`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/gen-token`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: getToken() },
       body: JSON.stringify(decryptedData),
     });
     const result = await response.json();
     if (!response.ok) {
-      enqueueSnackbar("Something went wrong: " + JSON.stringify(result), { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
+      enqueueSnackbar("Something went wrong: " + JSON.stringify(result), {
+        variant: "error",
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      });
     } else {
       setToken(result.token);
     }

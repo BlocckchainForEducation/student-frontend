@@ -46,7 +46,7 @@ export default function ProfileForm() {
         return;
       }
 
-      let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/profile`, {
+      let response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/profile`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: getToken() },
         // delete fetching field before send data to backend to avoid fail validate, delete imgSrc to avoid request too large error.
@@ -55,7 +55,10 @@ export default function ProfileForm() {
 
       if (!response.ok) {
         const error = await response.json();
-        enqueueSnackbar("Something went wrong: " + JSON.stringify(error), { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
+        enqueueSnackbar("Something went wrong: " + JSON.stringify(error), {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "center" },
+        });
       } else {
         setCheckPointState(state);
         dp(setProfile({ ...state, imgSrc: studentProfile.imgSrc }));
@@ -113,7 +116,12 @@ export default function ProfileForm() {
                   <InputLabel id="genderlabel" shrink>
                     Giới tính
                   </InputLabel>
-                  <Select id="gender" labelId="genderlabel" value={state?.gender} onChange={(e) => setState({ ...state, gender: e.target.value })}>
+                  <Select
+                    id="gender"
+                    labelId="genderlabel"
+                    value={state?.gender}
+                    onChange={(e) => setState({ ...state, gender: e.target.value })}
+                  >
                     <MenuItem value={1}>Nam</MenuItem>
                     <MenuItem value={2}>Nữ</MenuItem>
                     <MenuItem value={3}>Khác</MenuItem>

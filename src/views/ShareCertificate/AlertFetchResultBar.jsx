@@ -27,14 +27,17 @@ export default function AlertFetchResultBar(props) {
       enqueueSnackbar("Hãy mở ví và chọn tài khoản!", { variant: "info", anchorOrigin: { vertical: "top", horizontal: "center" } });
       const result = await askPrivateKeyFromWallet();
       if (!result.ok) {
-        enqueueSnackbar("Bạn cần cung cấp private key để có thể giải mã!", { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
+        enqueueSnackbar("Bạn cần cung cấp private key để có thể giải mã!", {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "center" },
+        });
         return;
       } else {
         // enqueueSnackbar("Đã nhận được private key từ ví!", { variant: "success", anchorOrigin: { vertical: "top", horizontal: "center" } });
         privateKeyHex = result.privateKeyHex;
       }
     }
-    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/decrypt-data`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/decrypt-data`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: getToken() },
       body: JSON.stringify({ encryptData, privateKeyHex }),

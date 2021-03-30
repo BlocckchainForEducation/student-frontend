@@ -22,7 +22,7 @@ export default function SelectionBar(props) {
       dp(resetState());
     } else {
       const publicKeyHex = selectedAccount.publicKeyHex;
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/encrypted-data?publicKeyHex=${publicKeyHex}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/encrypted-data?publicKeyHex=${publicKeyHex}`, {
         headers: { "Content-Type": "application/json", Authorization: getToken() },
       });
 

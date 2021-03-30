@@ -34,7 +34,7 @@ export default function AddAccount(props) {
       }
       // TODO: validate publicKeyHex, privateKeyHex(if exists)
 
-      let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/sawtooth-accounts`, {
+      let response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/sawtooth-accounts`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: getToken() },
         body: JSON.stringify(formState),
@@ -42,7 +42,10 @@ export default function AddAccount(props) {
 
       if (!response.ok) {
         const error = await response.json();
-        enqueueSnackbar("Something went wrong: " + JSON.stringify(error), { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
+        enqueueSnackbar("Something went wrong: " + JSON.stringify(error), {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "center" },
+        });
       } else {
         dp(addSawtoothAccount(formState));
         setFormState({

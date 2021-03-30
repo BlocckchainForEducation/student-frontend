@@ -50,7 +50,7 @@ const DashboardLayout = () => {
 
   async function fetchStudentProfile() {
     try {
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/profile`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/profile`, {
         headers: { Authorization: getToken() },
       });
       if (!response.ok) {

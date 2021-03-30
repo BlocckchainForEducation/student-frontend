@@ -1,4 +1,17 @@
-import { Box, Divider, IconButton, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@material-ui/core";
+import {
+  Box,
+  Divider,
+  IconButton,
+  makeStyles,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { getToken } from "../../utils/mng-token";
@@ -21,14 +34,17 @@ export default function AccountTable(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   async function hdDelete(publicKeyHex) {
-    let response = await fetch(`${process.env.REACT_APP_SERVER_URL}/student/sawtooth-accounts`, {
+    let response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/sawtooth-accounts`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json", Authorization: getToken() },
       body: JSON.stringify({ publicKeyHex }),
     });
     const result = response.json();
     if (!response.ok) {
-      enqueueSnackbar("Something went wrong: " + JSON.stringify(result), { variant: "error", anchorOrigin: { vertical: "top", horizontal: "center" } });
+      enqueueSnackbar("Something went wrong: " + JSON.stringify(result), {
+        variant: "error",
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      });
     } else {
       dp(deleteSawtoothAccount({ publicKeyHex }));
       enqueueSnackbar("Xóa tài khoản thành công!", { variant: "success", anchorOrigin: { vertical: "bottom", horizontal: "center" } });
