@@ -3,7 +3,7 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import { useSnackbar } from "notistack";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { getToken } from "../../utils/mng-token";
+import { getToken } from "../../../utils/mng-token";
 import FileSaver from "file-saver";
 
 const useStyles = makeStyles((theme) => ({

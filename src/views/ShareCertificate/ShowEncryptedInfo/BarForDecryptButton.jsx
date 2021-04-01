@@ -1,9 +1,9 @@
 import { Box, Button, makeStyles, Paper } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { useSnackbar } from "notistack";
-import { useDispatch } from "react-redux";
-import { getToken } from "../../utils/mng-token";
-import { updateDecryptedState } from "./redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getToken } from "../../../utils/mng-token";
+import { updateDecryptedState } from "../redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function DecryptDataButtonBar({ selectedAccount, encryptData }) {
+export default function BarForDecryptedButton() {
+  const selectedAccount = useSelector((state) => state.shareCertificateSlice.selectedAccount);
+  const selectedEduProgram = useSelector((state) => state.shareCertificateSlice.selectedEduProgram);
+
   const cls = useStyles();
   const dp = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
@@ -35,7 +38,7 @@ export default function DecryptDataButtonBar({ selectedAccount, encryptData }) {
         privateKeyHex = result.privateKeyHex;
       }
     }
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/decrypt-data`, {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/decrypt-eduprogram`, {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: getToken() },
       body: JSON.stringify({ encryptData, privateKeyHex }),

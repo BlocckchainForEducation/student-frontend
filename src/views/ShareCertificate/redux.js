@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const initState = {
-  currentSelectedAccount: null,
+  selectedAccount: null,
   eduPrograms: null,
   show: "none", // none, encrypt, decrypt
 };
@@ -13,14 +13,13 @@ const shareCertificateSlice = createSlice({
     deselectAccount: (state, action) => {
       Object.assign(state, initState);
     },
-    setSelectedAccountAndData: (state, action) => {
-      state.currentSelectedAccount = action.payload.currentSelectedAccount;
+    setSelectedAccAndEduPrograms: (state, action) => {
+      state.selectedAccount = action.payload.selectedAccount;
       state.eduPrograms = action.payload.eduPrograms;
     },
-    updateEncryptedState: (state, action) => {
+    setSelectedEduProgram: (state, action) => {
+      state.selectedEduProgram = action.payload.selectedEduProgram;
       state.show = "encrypt";
-      state.currentSelectedAccount = action.payload.currentSelectedAccount;
-      state.encryptedDataOfAccount = action.payload.encryptedDataOfAccount;
     },
     updateDecryptedState: (state, action) => {
       state.show = "decrypt";
@@ -30,4 +29,4 @@ const shareCertificateSlice = createSlice({
 });
 
 export default shareCertificateSlice.reducer;
-export const { updateEncryptedState, deselectAccount, setSelectedAccountAndData, updateDecryptedState } = shareCertificateSlice.actions;
+export const { setSelectedEduProgram, deselectAccount, setSelectedAccAndEduPrograms, updateDecryptedState } = shareCertificateSlice.actions;

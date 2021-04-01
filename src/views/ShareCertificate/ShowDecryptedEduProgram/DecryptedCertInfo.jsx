@@ -15,7 +15,7 @@ import {
 import CheckIcon from "@material-ui/icons/Check";
 import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import { useSelector } from "react-redux";
-import { getLinkFromTxid } from "../../utils/utils";
+import { getLinkFromTxid } from "../../../utils/utils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,10 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
-  const versions = useSelector(
-    (state) =>
-      state.shareCertificateSlice.decryptedDataOfAccount?.certificate?.versions
-  );
+  const versions = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount?.certificate?.versions);
 
   return (
     <div>
@@ -40,9 +37,7 @@ export default function DecryptedCertInfo(props) {
                 Thông tin bằng cấp
               </Typography>
               <Divider></Divider>
-              <Typography style={{ paddingTop: "8px" }}>
-                Chưa có bằng cấp!
-              </Typography>
+              <Typography style={{ paddingTop: "8px" }}>Chưa có bằng cấp!</Typography>
             </Box>
           </>
         )}
@@ -58,13 +53,7 @@ function CertTable({ cert }) {
   const [certPart1, certPart2] = separateCertificate(plain, cert);
   return (
     <>
-      <Box
-        pt={2}
-        pb={1}
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-      >
+      <Box pt={2} pb={1} display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="h4">Thông tin bằng cấp</Typography>
         {cert.active && (
           <Tooltip title="Bằng cấp hợp lệ, sẵn sàng để chia sẻ">
