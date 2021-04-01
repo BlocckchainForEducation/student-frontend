@@ -4,9 +4,8 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
-import { getToken } from "../../utils/mng-token";
 import { ERR_TOP_CENTER } from "../../utils/snackbar-utils";
-import { resetState, updateEncryptedState, setSelectedAccountAndData } from "./redux";
+import { deselectAccount, setSelectedAccountAndData } from "./redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,14 +22,14 @@ export default function SelectionBar(props) {
 
   async function hdChangeSelection(e, selectedAccount) {
     if (selectedAccount === null) {
-      dp(resetState());
+      dp(deselectAccount());
     } else {
       try {
         const response = await axios.get(`/student/data/${selectedAccount.publicKeyHex}`);
-        dp(setSelectedAccountAndData({ currentSelectedAccount: selectedAccount, data: response.data }));
+        dp(setSelectedAccountAndData({ currentSelectedAccount: selectedAccount, eduPrograms: response.data }));
       } catch (error) {
         console.error(error);
-        // enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
+        error.response && enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
       }
     }
   }

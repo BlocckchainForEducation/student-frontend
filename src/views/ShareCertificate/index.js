@@ -1,13 +1,8 @@
-import { Box, makeStyles } from "@material-ui/core";
+import { Box, makeStyles, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import View from "../../shared/View";
-import AlertDecryptResultBar from "./AlertDecryptResultBar";
-import AlertFetchResultBar from "./AlertFetchResultBar";
-import DecryptedCertInfo from "./DecryptedCertInfo";
-import DecryptedSubjectTable from "./DecryptedSubjectTable";
-import EncryptedCertInfo from "./EncryptedCertInfo";
-import EncryptedSubjectTable from "./EncryptedSubjectTable";
 import SelectionBar from "./SelectionBar";
+import ShowEduProgramsInfo from "./ShowEduProgramsInfo";
 
 const useStyels = makeStyles((theme) => ({
   root: {
@@ -19,25 +14,24 @@ const useStyels = makeStyles((theme) => ({
 
 export default function ShareCertificate(props) {
   const cls = useStyels();
-  const show = useSelector((state) => state.shareCertificateSlice.show);
+  const currentSelectedAccount = useSelector((state) => state.shareCertificateSlice.currentSelectedAccount);
+  const eduPrograms = useSelector((state) => state.shareCertificateSlice.eduPrograms);
 
   return (
     <View title="Chia sẻ bằng cấp">
       <Box className={cls.root}>
         <SelectionBar></SelectionBar>
-        {show === "encrypt" && (
-          <>
-            <AlertFetchResultBar></AlertFetchResultBar>
-            <EncryptedCertInfo></EncryptedCertInfo>
-            <EncryptedSubjectTable></EncryptedSubjectTable>
-          </>
+
+        {currentSelectedAccount && eduPrograms.length === 0 && (
+          <Box p={2} bgcolor="white">
+            <Typography>Không tìm thấy chương trình đào tạo nào!</Typography>
+          </Box>
         )}
-        {show === "decrypt" && (
-          <>
-            <AlertDecryptResultBar></AlertDecryptResultBar>
-            <DecryptedCertInfo></DecryptedCertInfo>
-            <DecryptedSubjectTable></DecryptedSubjectTable>
-          </>
+
+        {currentSelectedAccount && eduPrograms.length !== 0 && (
+          <Box p={2} bgcolor="white">
+            <ShowEduProgramsInfo eduPrograms={eduPrograms}></ShowEduProgramsInfo>
+          </Box>
         )}
       </Box>
     </View>

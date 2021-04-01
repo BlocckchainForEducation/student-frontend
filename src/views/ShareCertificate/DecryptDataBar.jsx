@@ -1,7 +1,7 @@
 import { Box, Button, makeStyles, Paper } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { useSnackbar } from "notistack";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getToken } from "../../utils/mng-token";
 import { updateDecryptedState } from "./redux";
 
@@ -14,10 +14,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AlertFetchResultBar(props) {
+export default function DecryptDataButtonBar({ selectedAccount, encryptData }) {
   const cls = useStyles();
-  const selectedAccount = useSelector((state) => state.shareCertificateSlice.currentSelectedAccount);
-  const encryptData = useSelector((state) => state.shareCertificateSlice.encryptedDataOfAccount);
   const dp = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
