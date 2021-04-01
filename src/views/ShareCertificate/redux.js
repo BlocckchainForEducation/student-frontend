@@ -22,6 +22,10 @@ const shareCertificateSlice = createSlice({
     resetState: (state, action) => {
       Object.assign(state, initState);
     },
+    setSelectedAccountAndData: (state, action) => {
+      state.currentSelectedAccount = action.payload.currentSelectedAccount;
+      state.dataOfCurrentSelectedAccount = action.payload.data;
+    },
     updateEncryptedState: (state, action) => {
       state.show = "encrypt";
       state.currentSelectedAccount = action.payload.currentSelectedAccount;
@@ -35,4 +39,4 @@ const shareCertificateSlice = createSlice({
 });
 
 export default shareCertificateSlice.reducer;
-export const { updateEncryptedState, resetState, updateDecryptedState } = shareCertificateSlice.actions;
+export const { updateEncryptedState, resetState, setSelectedAccountAndData, updateDecryptedState } = shareCertificateSlice.actions;

@@ -1,9 +1,12 @@
 import { makeStyles, Paper } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
+import axios from "axios";
+import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
 import { getToken } from "../../utils/mng-token";
-import { resetState, updateEncryptedState } from "./redux";
+import { ERR_TOP_CENTER } from "../../utils/snackbar-utils";
+import { resetState, updateEncryptedState, setSelectedAccountAndData } from "./redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,22 +19,18 @@ export default function SelectionBar(props) {
   const accounts = useSelector((state) => state.sawtoothAccountsSlice.accounts);
   const currentSelectedAccount = useSelector((state) => state.shareCertificateSlice.currentSelectedAccount);
   const dp = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   async function hdChangeSelection(e, selectedAccount) {
     if (selectedAccount === null) {
       dp(resetState());
     } else {
-      const publicKeyHex = selectedAccount.publicKeyHex;
-      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/encrypted-data?publicKeyHex=${publicKeyHex}`, {
-        headers: { "Content-Type": "application/json", Authorization: getToken() },
-      });
-
-      const result = await response.json();
-      if (!response.ok) {
-        console.log(result);
-      } else {
-        // result: {publicKeyHex, certificate: {address, versions: [{txid, timestamp, active, cipher}] }, subjects: [{address, versions: [{txid, timestamp, active, cipher}, {}...] } ]}
-        dp(updateEncryptedState({ currentSelectedAccount: selectedAccount, encryptedDataOfAccount: result }));
+      try {
+        const response = await axios.get(`/student/data/${selectedAccount.publicKeyHex}`);
+        dp(setSelectedAccountAndData({ currentSelectedAccount: selectedAccount, data: response.data }));
+      } catch (error) {
+        console.error(error);
+        // enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
       }
     }
   }
@@ -42,7 +41,7 @@ export default function SelectionBar(props) {
         size="small"
         renderInput={(params) => <TextField {...params} label="Chọn tài khoản" variant="outlined" />}
         options={accounts}
-        getOptionLabel={(account) => `${account.publicKeyHex.slice(0, 30) + "..." + account.publicKeyHex.slice(-30)} - ${account.note}`}
+        getOptionLabel={(account) => `${account.publicKeyHex.slice(0, 15) + "..." + account.publicKeyHex.slice(-15)} - ${account.note}`}
         value={currentSelectedAccount}
         getOptionSelected={(option, value) => option.publicKeyHex === value.publicKeyHex}
         onChange={hdChangeSelection}

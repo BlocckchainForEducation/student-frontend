@@ -1,3 +1,5 @@
+import axios from "axios";
+
 let remember = true;
 
 function setRemember(_remember) {
@@ -10,10 +12,12 @@ function getRemember() {
 
 function setSessionToken(token) {
   sessionStorage.setItem("token", "Bearer " + token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 }
 
 function setLocalToken(token) {
   localStorage.setItem("token", "Bearer " + token);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 }
 
 function getToken() {
@@ -22,6 +26,7 @@ function getToken() {
 }
 
 function clearToken() {
+  axios.defaults.headers.common["Authorization"] = null;
   if (remember) {
     localStorage.removeItem("token");
   } else {
