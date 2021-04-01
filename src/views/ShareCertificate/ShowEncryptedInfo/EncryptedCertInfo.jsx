@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EncryptedCertInfo(props) {
   const cls = useStyles();
   const cipher = useSelector((state) => {
-    const versions = state.shareCertificateSlice.encryptedDataOfAccount.certificate.versions;
+    const versions = state.shareCertificateSlice.selectedEduProgram.certificate?.versions;
     if (!versions) {
       return <Typography>Chưa có bằng cấp!</Typography>;
     }

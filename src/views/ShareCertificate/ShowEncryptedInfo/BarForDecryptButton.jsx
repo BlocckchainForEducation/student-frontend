@@ -1,9 +1,11 @@
 import { Box, Button, makeStyles, Paper } from "@material-ui/core";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useDispatch, useSelector } from "react-redux";
-import { getToken } from "../../../utils/mng-token";
-import { updateDecryptedState } from "../redux";
+import { requirePrivateKeyHex } from "../../../utils/keyholder";
+import { ERR_TOP_CENTER } from "../../../utils/snackbar-utils";
+import { setDecryptedEduProgram } from "../redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,45 +27,15 @@ export default function BarForDecryptedButton() {
   async function hdClick() {
     let privateKeyHex = selectedAccount.privateKey;
     if (!privateKeyHex) {
-      enqueueSnackbar("Hãy mở ví và chọn tài khoản!", { variant: "info", anchorOrigin: { vertical: "top", horizontal: "center" } });
-      const result = await askPrivateKeyFromWallet();
-      if (!result.ok) {
-        enqueueSnackbar("Bạn cần cung cấp private key để có thể giải mã!", {
-          variant: "error",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
-        });
-        return;
-      } else {
-        // enqueueSnackbar("Đã nhận được private key từ ví!", { variant: "success", anchorOrigin: { vertical: "top", horizontal: "center" } });
-        privateKeyHex = result.privateKeyHex;
-      }
+      privateKeyHex = await requirePrivateKeyHex(enqueueSnackbar);
     }
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/decrypt-eduprogram`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: getToken() },
-      body: JSON.stringify({ encryptData, privateKeyHex }),
-    });
-    const result = await response.json();
-    if (!response.ok) {
-      console.log(result);
-    } else {
-      dp(updateDecryptedState(result));
+    try {
+      const response = await axios.post("/student/decrypt-eduprogram", { privateKeyHex, selectedEduProgram });
+      dp(setDecryptedEduProgram(response.data));
+    } catch (error) {
+      console.error(error);
+      error.response && enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
     }
-  }
-
-  async function askPrivateKeyFromWallet() {
-    return new Promise((resolve, reject) => {
-      window.postMessage({ type: "SIGN_REQUEST" }, window.origin);
-      window.addEventListener("message", function (event) {
-        if (event.data.type === "SIGN_RESPONSE" && event.origin === window.origin) {
-          if (event.data.accept) {
-            return resolve({ ok: true, privateKeyHex: event.data.account.privateKey });
-          } else {
-            return resolve({ ok: false });
-          }
-        }
-      });
-    });
   }
 
   return (

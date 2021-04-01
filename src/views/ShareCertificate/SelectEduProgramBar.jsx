@@ -21,32 +21,14 @@ export default function ShowEduProgramsInfo() {
   }
 
   return (
-    <div>
-      <Autocomplete
-        size="small"
-        renderInput={(params) => <TextField {...params} label="Chọn chương trình đào tạo" variant="outlined" />}
-        options={eduPrograms}
-        getOptionLabel={(eduProgram) => eduProgram.subjects[0].versions[0].portfolio_id}
-        value={selectedEduProgram}
-        getOptionSelected={(option, value) => option.subjects[0].versions[0].portfolio_id === value.subjects[0].versions[0].portfolio_id}
-        onChange={hdChangeSelection}
-      />
-
-      {selectedEduProgram && show === "encrypt" && (
-        <>
-          <DecryptDataBar></DecryptDataBar>
-          <EncryptedCertInfo></EncryptedCertInfo>
-          <EncryptedSubjectTable></EncryptedSubjectTable>
-        </>
-      )}
-
-      {selectedEduProgram && show === "decrypt" && (
-        <>
-          <AlertDecryptResultBar></AlertDecryptResultBar>
-          <DecryptedCertInfo></DecryptedCertInfo>
-          <DecryptedSubjectTable></DecryptedSubjectTable>
-        </>
-      )}
-    </div>
+    <Autocomplete
+      size="small"
+      renderInput={(params) => <TextField {...params} label="Chọn chương trình đào tạo" variant="outlined" />}
+      options={eduPrograms}
+      getOptionLabel={(eduProgram) => eduProgram.subjects[0].versions[0].portfolio_id}
+      value={selectedEduProgram}
+      getOptionSelected={(option, value) => option.subjects[0].versions[0].portfolio_id === value.subjects[0].versions[0].portfolio_id}
+      onChange={hdChangeSelection}
+    />
   );
 }

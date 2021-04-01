@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function EncryptedSubjectTable(props) {
   const cls = useStyles();
-  const subjects = useSelector((state) => state.shareCertificateSlice.encryptedDataOfAccount.subjects);
+  const subjects = useSelector((state) => state.shareCertificateSlice.selectedEduProgram.subjects);
   return (
     <div>
       <Paper className={cls.root}>
