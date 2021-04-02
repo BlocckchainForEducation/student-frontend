@@ -1,7 +1,7 @@
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedEduProgram } from "./redux";
+import { deselectEduProgram, setSelectedEduProgram } from "./redux";
 
 export default function ShowEduProgramsInfo() {
   const eduPrograms = useSelector((state) => state.shareCertificateSlice.eduPrograms);
@@ -11,7 +11,11 @@ export default function ShowEduProgramsInfo() {
   const dp = useDispatch();
 
   function hdChangeSelection(e, selectedEduProgram) {
-    dp(setSelectedEduProgram({ selectedEduProgram }));
+    if (!selectedEduProgram) {
+      dp(deselectEduProgram());
+    } else {
+      dp(setSelectedEduProgram({ selectedEduProgram }));
+    }
   }
 
   return (

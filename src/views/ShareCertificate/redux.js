@@ -22,6 +22,10 @@ const shareCertificateSlice = createSlice({
       state.selectedEduProgram = action.payload.selectedEduProgram;
       state.show = "encrypt";
     },
+    deselectEduProgram: (state, action) => {
+      state.selectedEduProgram = null;
+      state.show = "none";
+    },
     setDecryptedEduProgram: (state, action) => {
       state.decryptedEduProgram = action.payload;
       state.show = "decrypt";
@@ -34,5 +38,6 @@ export const {
   deselectAccount,
   setSelectedAccAndEduPrograms,
   setSelectedEduProgram,
+  deselectEduProgram,
   setDecryptedEduProgram,
 } = shareCertificateSlice.actions;
