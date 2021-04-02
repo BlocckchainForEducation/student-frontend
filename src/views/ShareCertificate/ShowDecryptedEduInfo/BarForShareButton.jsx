@@ -24,7 +24,12 @@ export default function BarForShareButton(props) {
   const { enqueueSnackbar } = useSnackbar();
 
   async function hdClick() {
-    if (!(decryptedData.certificate?.versions[0].type === "revoke")) {
+    if (!decryptedData.certificate) {
+      enqueueSnackbar("Chưa có bằng cấp để chia sẻ!", ERR_TOP_CENTER);
+      return;
+    }
+    // supose backend already sort versions
+    if (decryptedData.certificate.versions[0].type === "revoke") {
       enqueueSnackbar("Không thể chia sẻ bằng cấp đã bị thu hồi!", ERR_TOP_CENTER);
       return;
     }
