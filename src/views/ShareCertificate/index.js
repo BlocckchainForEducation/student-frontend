@@ -4,6 +4,7 @@ import View from "../../shared/View";
 import SelectionAccountBar from "./SelectionAccountBar";
 import SelectEduProgramBar from "./SelectEduProgramBar";
 import ShowEncryptedInfo from "./ShowEncryptedInfo";
+import ShowDecryptInfo from "./ShowDecryptedEduInfo";
 
 const useStyels = makeStyles((theme) => ({
   root: {
@@ -35,7 +36,9 @@ export default function ShareCertificate(props) {
             <Box p={2} bgcolor="white">
               <SelectEduProgramBar></SelectEduProgramBar>
             </Box>
+
             {show === "encrypt" && <ShowEncryptedInfo />}
+            {show === "decrypt" && <ShowDecryptInfo />}
           </>
         )}
       </Box>

@@ -1,12 +1,6 @@
 import { TextField } from "@material-ui/core";
 import { Autocomplete } from "@material-ui/lab";
 import { useDispatch, useSelector } from "react-redux";
-import AlertDecryptResultBar from "./ShowDecryptedEduProgram/AlertDecryptResultBar";
-import DecryptDataBar from "./ShowEncryptedInfo/BarForDecryptButton";
-import DecryptedCertInfo from "./ShowDecryptedEduProgram/DecryptedCertInfo";
-import DecryptedSubjectTable from "./ShowDecryptedEduProgram/DecryptedSubjectTable";
-import EncryptedCertInfo from "./ShowEncryptedInfo/EncryptedCertInfo";
-import EncryptedSubjectTable from "./ShowEncryptedInfo/EncryptedSubjectTable";
 import { setSelectedEduProgram } from "./redux";
 
 export default function ShowEduProgramsInfo() {

@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { getToken } from "../../../utils/mng-token";
 import FileSaver from "file-saver";
+import { ERR_TOP_CENTER } from "../../../utils/snackbar-utils";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,33 +17,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AlertDecryptResultBar(props) {
+export default function BarForShareButton(props) {
   const cls = useStyles();
-  const decryptedData = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount);
+  const decryptedData = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram);
   const [token, setToken] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
 
   async function hdClick() {
-    if (!decryptedData.certificate.versions[0].active) {
-      enqueueSnackbar("Không thể chia sẻ bằng cấp đã bị thu hồi!", {
-        variant: "error",
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-      });
+    if (!(decryptedData.certificate?.versions[0].type === "revoke")) {
+      enqueueSnackbar("Không thể chia sẻ bằng cấp đã bị thu hồi!", ERR_TOP_CENTER);
       return;
     }
-    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/gen-token`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: getToken() },
-      body: JSON.stringify(decryptedData),
-    });
-    const result = await response.json();
-    if (!response.ok) {
-      enqueueSnackbar("Something went wrong: " + JSON.stringify(result), {
-        variant: "error",
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-      });
-    } else {
-      setToken(result.token);
+
+    try {
+      const response = await axios.post("/student/gen-token", decryptedData);
+      setToken(response.data.token);
+    } catch (error) {
+      enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
     }
   }
 

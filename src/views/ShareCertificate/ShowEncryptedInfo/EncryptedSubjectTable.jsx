@@ -1,5 +1,5 @@
+import { Box, Divider, makeStyles, Paper, Typography } from "@material-ui/core";
 import React from "react";
-import { Box, Button, Divider, makeStyles, Paper, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
