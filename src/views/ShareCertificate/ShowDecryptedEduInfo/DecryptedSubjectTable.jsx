@@ -22,9 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedSubjectTable(props) {
   const cls = useStyles();
-  const subjects = useSelector(
-    (state) => state.shareCertificateSlice.decryptedDataOfAccount.subjects
-  );
+  const subjects = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram.subjects);
 
   return (
     <div>

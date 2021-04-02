@@ -47,16 +47,23 @@ export default function BarForShareButton(props) {
       <Box display="flex" alignItems="center">
         <Box flexGrow={1}>
           <Alert severity="success">
-            <AlertTitle>Giải mã dữ liệu bản mã thành công!</AlertTitle>
+            <AlertTitle>Giải mã dữ liệu thành công!</AlertTitle>
           </Alert>
         </Box>
-        {decryptedData.certificate && (
+        {/* {decryptedData.certificate && (
           <Box pl={2} flexShrink={0}>
             <Button variant="contained" color="primary" onClick={hdClick}>
               Chia sẻ
             </Button>
           </Box>
-        )}
+        )} */}
+        {
+          <Box pl={2} flexShrink={0}>
+            <Button variant="contained" color="primary" onClick={hdClick} disabled={Boolean(!decryptedData.certificate)}>
+              Chia sẻ
+            </Button>
+          </Box>
+        }
       </Box>
       <TokenDialog token={token} setToken={setToken}></TokenDialog>
     </Paper>

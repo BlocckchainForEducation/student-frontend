@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
-  const versions = useSelector((state) => state.shareCertificateSlice.decryptedDataOfAccount?.certificate?.versions);
+  const versions = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram?.certificate?.versions);
 
   return (
     <div>
@@ -55,12 +55,12 @@ function CertTable({ cert }) {
     <>
       <Box pt={2} pb={1} display="flex" justifyContent="space-between" alignItems="center">
         <Typography variant="h4">Thông tin bằng cấp</Typography>
-        {cert.active && (
+        {cert.type !== "revoke" && (
           <Tooltip title="Bằng cấp hợp lệ, sẵn sàng để chia sẻ">
             <CheckIcon color="primary" size="1rem"></CheckIcon>
           </Tooltip>
         )}
-        {!cert.active && (
+        {!cert.type === "revoke" && (
           <Tooltip title="Bằng cấp đã bị thu hồi!">
             <ErrorOutlineIcon color="secondary" size="1rem"></ErrorOutlineIcon>
           </Tooltip>
