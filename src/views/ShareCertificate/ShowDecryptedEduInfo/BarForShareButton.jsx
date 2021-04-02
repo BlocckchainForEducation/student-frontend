@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
 export default function BarForShareButton(props) {
   const cls = useStyles();
   const decryptedData = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram);
+  const selectedAccount = useSelector((state) => state.shareCertificateSlice.selectedAccount);
+
   const [token, setToken] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -35,7 +37,7 @@ export default function BarForShareButton(props) {
     }
 
     try {
-      const response = await axios.post("/student/gen-token", decryptedData);
+      const response = await axios.post("/student/gen-token", { publicKeyHex: selectedAccount.publicKeyHex, ...decryptedData });
       setToken(response.data.token);
     } catch (error) {
       enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
