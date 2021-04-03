@@ -6,7 +6,6 @@ import { deselectEduProgram, setSelectedEduProgram } from "./redux";
 export default function ShowEduProgramsInfo() {
   const eduPrograms = useSelector((state) => state.shareCertificateSlice.eduPrograms);
   const selectedEduProgram = useSelector((state) => state.shareCertificateSlice.selectedEduProgram);
-  const show = useSelector((state) => state.shareCertificateSlice.show);
 
   const dp = useDispatch();
 

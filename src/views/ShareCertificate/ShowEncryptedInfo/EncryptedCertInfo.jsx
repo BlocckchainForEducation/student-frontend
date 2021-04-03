@@ -15,7 +15,7 @@ export default function EncryptedCertInfo(props) {
       return <Typography>Chưa có bằng cấp!</Typography>;
     }
     // backend already sort the arrays
-    return versions[0].cipher;
+    return versions[versions.length - 1].cipher;
   });
   return (
     <div>

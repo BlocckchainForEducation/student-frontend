@@ -41,7 +41,7 @@ export default function DecryptedCertInfo(props) {
             </Box>
           </>
         )}
-        {versions && versions[0] && <CertTable cert={versions[0]}></CertTable>}
+        {versions && versions[versions.length - 1] && <CertTable cert={versions[versions.length - 1]}></CertTable>}
       </Paper>
     </div>
   );
