@@ -8,6 +8,7 @@ import { setProfile } from "../../views/StudentProfile/redux";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../shared/Loading";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { setFetchedAccounts } from "../../views/AccountManagement/redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,6 +58,29 @@ const DashboardLayout = () => {
         alert(JSON.stringify(await response.json()));
       } else {
         dp(setProfile(await response.json()));
+      }
+    } catch (err) {
+      console.log(err);
+      alert(err);
+    }
+  }
+
+  // const dp = useDispatch();
+
+  useEffect(() => {
+    fetchSawtoothAccounts();
+  }, []);
+
+  async function fetchSawtoothAccounts() {
+    try {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/student/sawtooth-accounts`, {
+        headers: { Authorization: getToken() },
+      });
+      if (!response.ok) {
+        alert(JSON.stringify(await response.json()));
+      } else {
+        const sawtoothAccounts = await response.json();
+        dp(setFetchedAccounts(sawtoothAccounts));
       }
     } catch (err) {
       console.log(err);

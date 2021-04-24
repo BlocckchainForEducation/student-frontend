@@ -1,47 +1,40 @@
-import React, { useEffect } from "react";
-import { Link as RouterLink, useLocation } from "react-router-dom";
+import { Avatar, Box, Divider, Drawer, Hidden, List, makeStyles, Typography } from "@material-ui/core";
+import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
+import AspectRatioIcon from "@material-ui/icons/AspectRatio";
+import PersonIcon from "@material-ui/icons/Person";
 import PropTypes from "prop-types";
-import { Avatar, Box, Divider, Drawer, Hidden, List, Typography, makeStyles } from "@material-ui/core";
-import {
-  AlertCircle as AlertCircleIcon,
-  BarChart as BarChartIcon,
-  Lock as LockIcon,
-  Settings as SettingsIcon,
-  ShoppingBag as ShoppingBagIcon,
-  User as UserIcon,
-  UserPlus as UserPlusIcon,
-  Users as UsersIcon,
-} from "react-feather";
-import NavItem from "./NavItem";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-
-const user = {
-  avatar: "/static/images/avatars/avatar_6.png",
-  jobTitle: "Senior Developer",
-  name: "Katarina Smith",
-};
+import { Link as RouterLink, useLocation } from "react-router-dom";
+import NavItem from "./NavItem";
+import AssignmentIndIcon from "@material-ui/icons/AssignmentInd";
+// const user = {
+//   avatar: "/static/images/avatars/avatar_6.png",
+//   jobTitle: "Senior Developer",
+//   name: "Katarina Smith",
+// };
 
 const items = [
   {
     href: "/nh/thong-tin-ca-nhan",
-    icon: UserIcon,
+    icon: PersonIcon,
     title: "Thông tin cá nhân",
   },
   {
     href: "/nh/quan-ly-tai-khoan",
-    icon: UsersIcon,
+    icon: AccountBalanceWalletIcon,
     title: "Quản lý tài khoản",
   },
   {
     href: "/nh/chia-se-bang-cap",
-    icon: ShoppingBagIcon,
+    icon: AspectRatioIcon,
     title: "Chia sẻ bằng cấp",
   },
-  // {
-  //   href: "/app/account",
-  //   icon: UserIcon,
-  //   title: "Account",
-  // },
+  {
+    href: "/nh/chia-se-cv",
+    icon: AssignmentIndIcon,
+    title: "Chia sẻ CV",
+  },
   // {
   //   href: "/app/settings",
   //   icon: SettingsIcon,
