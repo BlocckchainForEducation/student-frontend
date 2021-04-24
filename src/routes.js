@@ -10,6 +10,7 @@ import StudentProfile from "./views/StudentProfile";
 import Test from "./Test";
 import AccountManagement from "./views/AccountManagement";
 import ShareCertificate from "./views/ShareCertificate";
+import ShareCV from "./views/ShareCV";
 
 const routes = [
   {
@@ -19,6 +20,7 @@ const routes = [
       { path: "thong-tin-ca-nhan", element: <StudentProfile /> },
       { path: "quan-ly-tai-khoan", element: <AccountManagement /> },
       { path: "chia-se-bang-cap", element: <ShareCertificate /> },
+      { path: "chia-se-cv", element: <ShareCV /> },
       { path: "*", element: <Navigate to="/404" replace={true} /> },
     ],
   },

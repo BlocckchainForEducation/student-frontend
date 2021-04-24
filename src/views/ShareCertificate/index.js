@@ -1,4 +1,4 @@
-import { Box, makeStyles, Typography } from "@material-ui/core";
+import { Box, makeStyles, Paper, Typography } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import View from "../../shared/View";
 import SelectionAccountBar from "./SelectionAccountBar";
@@ -33,9 +33,9 @@ export default function ShareCertificate(props) {
 
         {selectedAccount && eduPrograms.length !== 0 && (
           <>
-            <Box p={2} bgcolor="white">
+            <Paper style={{ padding: "16px" }}>
               <SelectEduProgramBar></SelectEduProgramBar>
-            </Box>
+            </Paper>
 
             {show === "encrypt" && <ShowEncryptedInfo />}
             {show === "decrypt" && <ShowDecryptInfo />}
