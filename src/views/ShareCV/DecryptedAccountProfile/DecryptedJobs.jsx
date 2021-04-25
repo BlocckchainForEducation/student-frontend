@@ -1,17 +1,20 @@
-import { Box, Divider, Grid, Paper, Typography } from "@material-ui/core";
+import { Box, Divider, FormControlLabel, Grid, Paper, Typography } from "@material-ui/core";
+import Checkbox from "@material-ui/core/Checkbox";
 import { getLinkFromTxid } from "../../../utils/utils";
 import { SimpleTable } from "../../ShareCertificate/ShowDecryptedEduInfo/DecryptedCertInfo";
 
-export default function DecryptedJobs({ jobs }) {
+export default function DecryptedJobs({ accountIndex, jobs, hdToggleShareJob }) {
   return (
     <div>
-      {jobs.map((job, index) => {
+      {jobs.map((job, jobIndex) => {
         const [part1, part2] = separateJob(job);
         return (
-          <div key={index}>
-            <Paper style={{ padding: "16px" }}>
-              <Typography variant="h5">Mã công việc: {job.jobId}</Typography>
-              {/* <hr /> */}
+          <div key={jobIndex}>
+            <Paper style={{ padding: "8px 16px" }}>
+              <FormControlLabel
+                control={<Checkbox checked={Boolean(job.share)} onChange={() => hdToggleShareJob(accountIndex, jobIndex)}></Checkbox>}
+                label={<Typography variant="h5">Mã công việc: {job.jobId}</Typography>}
+              ></FormControlLabel>
             </Paper>
 
             <Box mb={1}></Box>

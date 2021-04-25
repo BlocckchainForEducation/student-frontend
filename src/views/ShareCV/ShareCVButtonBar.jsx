@@ -1,4 +1,4 @@
-import { Box, Button, makeStyles, Paper } from "@material-ui/core";
+import { Box, Button, makeStyles } from "@material-ui/core";
 import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles((theme) => ({

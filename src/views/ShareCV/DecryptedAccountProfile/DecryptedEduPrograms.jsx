@@ -1,19 +1,25 @@
-import { Box, Paper, Typography } from "@material-ui/core";
+import { Box, Checkbox, FormControlLabel, Paper, Typography } from "@material-ui/core";
 import { CertTable } from "../../ShareCertificate/ShowDecryptedEduInfo/DecryptedCertInfo";
 import DecryptedSubjectTable from "./DecryptedSubjectTable";
 
-export default function DecryptedEduPrograms({ eduPrograms }) {
+export default function DecryptedEduPrograms({ accountIndex, eduPrograms, hdToggleShareEduProgram }) {
   return (
     <div>
-      {eduPrograms.map((eduProgram, index) => {
+      {eduPrograms.map((eduProgram, eduProgramIndex) => {
         const versions = eduProgram?.certificate?.versions;
         return (
-          <div>
-            <Paper style={{ padding: "16px" }}>
-              <Typography variant="h5">Mã CTĐT: {eduProgram.eduProgram.eduProgramId}</Typography>
-              {/* <hr /> */}
+          <div key={eduProgramIndex}>
+            <Paper style={{ padding: "8px 16px" }}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={Boolean(eduProgram.share)}
+                    onChange={() => hdToggleShareEduProgram(accountIndex, eduProgramIndex)}
+                  ></Checkbox>
+                }
+                label={<Typography variant="h5">Mã CTĐT: {eduProgram.eduProgram.eduProgramId}</Typography>}
+              ></FormControlLabel>
             </Paper>
-
             <Box mb={1}></Box>
 
             <Box pl={2}>
