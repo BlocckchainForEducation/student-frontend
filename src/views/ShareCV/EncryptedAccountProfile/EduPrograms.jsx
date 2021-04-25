@@ -3,19 +3,25 @@ import { Box, Paper, Typography } from "@material-ui/core";
 export default function EduPrograms({ eduPrograms }) {
   return eduPrograms.map((eduPro, index) => (
     <Paper style={{ padding: "8px" }}>
-      <Typography gutterBottom>Mã CTĐT: {eduPro.eduProgram.eduProgramId}</Typography>
+      <Typography gutterBottom variant="h5">
+        Mã CTĐT: {eduPro.eduProgram.eduProgramId}
+      </Typography>
       <hr />
 
-      <Typography>Bằng cấp</Typography>
-      <Box>{eduPro.certificate.versions[0].cipher}</Box>
+      <Box mt={1}></Box>
+      <Typography variant="h5">Bằng cấp</Typography>
+      <Box mt={1} mb={2} style={{ wordWrap: "break-word" }}>
+        {eduPro.certificate.versions[0].cipher}
+      </Box>
 
-      <Box mb={2}></Box>
-
-      <Typography>Bảng điểm</Typography>
+      <Typography variant="h5">Bảng điểm</Typography>
+      <Box mt={1}></Box>
       {eduPro.subjects.map((subject, index) => (
-        <Box key={index} mb={1}>
+        <Box mb={2} key={index}>
           {subject.versions.map((version, vindex) => (
-            <Box key={vindex}>{version.cipher}</Box>
+            <Box key={vindex} style={{ wordWrap: "break-word" }}>
+              {version.cipher}
+            </Box>
           ))}
         </Box>
       ))}

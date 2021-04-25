@@ -6,9 +6,11 @@ export default function Jobs({ jobs }) {
       {jobs.map((job, index) => (
         <Box key={index}>
           <Box>
-            <Typography gutterBottom>{`Mã Công Việc: ${job.jobId}`}</Typography>
+            <Typography gutterBottom variant="h5">{`Mã Công Việc: ${job.jobId}`}</Typography>
             <hr />
-            <Box py={1}>{job.start.cipher}</Box>
+            <Box py={1} style={{ wordWrap: "break-word" }}>
+              {job.start.cipher}
+            </Box>
           </Box>
         </Box>
       ))}

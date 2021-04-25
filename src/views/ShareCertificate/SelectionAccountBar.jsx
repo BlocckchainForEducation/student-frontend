@@ -29,7 +29,7 @@ export default function SelectionBar(props) {
         dp(setSelectedAccAndEduPrograms({ selectedAccount: selectedAccount, eduPrograms: response.data }));
       } catch (error) {
         console.error(error);
-        error.response && enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
+        error.response && error.response && enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
       }
     }
   }

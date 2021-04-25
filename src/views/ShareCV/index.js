@@ -6,11 +6,18 @@ import { ERR_TOP_CENTER } from "../../utils/snackbar-utils";
 import ShareCVButtonBar from "./ShareCVButtonBar";
 import EncryptedAccountProfile from "./EncryptedAccountProfile";
 import { Box, Paper, useTheme } from "@material-ui/core";
+import { setFetchedAccounts } from "../AccountManagement/redux";
 
 export default function ShareCV(props) {
   const [fetching, setFetching] = useState(true);
   const [accountProfiles, setAccountProfiles] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
+
+  function updateAccountProfile(accountProfile, index) {
+    const cloneAccProfiles = [...accountProfiles];
+    cloneAccProfiles[index] = accountProfile;
+    setFetchedAccounts(cloneAccProfiles);
+  }
 
   useEffect(() => {
     async function fetchAccountProfiles() {
@@ -19,7 +26,7 @@ export default function ShareCV(props) {
         setAccountProfiles(response.data);
         setFetching(false);
       } catch (error) {
-        enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
+        error.response && enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
       }
     }
     fetchAccountProfiles();
@@ -32,7 +39,11 @@ export default function ShareCV(props) {
           <ShareCVButtonBar></ShareCVButtonBar>
           <Box mt={2}>
             {accountProfiles.map((accountProfile, index) =>
-              accountProfile.isDecrypted ? <div></div> : <EncryptedAccountProfile accountProfile={accountProfile} index={index} />
+              accountProfile.isDecrypted ? (
+                <div>decrypted data</div>
+              ) : (
+                <EncryptedAccountProfile {...{ updateAccountProfile, index, accountProfile }} />
+              )
             )}
           </Box>
         </div>

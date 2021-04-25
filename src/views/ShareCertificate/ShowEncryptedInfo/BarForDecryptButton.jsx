@@ -34,7 +34,7 @@ export default function BarForDecryptedButton() {
       dp(setDecryptedEduProgram(response.data));
     } catch (error) {
       console.error(error);
-      error.response && enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
+      error.response && error.response && enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
     }
   }
 

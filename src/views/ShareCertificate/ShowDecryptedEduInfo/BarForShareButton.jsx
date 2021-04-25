@@ -40,7 +40,7 @@ export default function BarForShareButton(props) {
       const response = await axios.post("/student/gen-token", { publicKeyHex: selectedAccount.publicKeyHex, ...decryptedData });
       setToken(response.data.token);
     } catch (error) {
-      enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
+      error.response && enqueueSnackbar(JSON.stringify(error.response.data), ERR_TOP_CENTER);
     }
   }
 
