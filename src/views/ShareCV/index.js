@@ -32,7 +32,7 @@ export default function ShareCV(props) {
           <ShareCVButtonBar></ShareCVButtonBar>
           <Box mt={2}>
             {accountProfiles.map((accountProfile, index) =>
-              accountProfile.isDecrypted ? <div></div> : <EncryptedAccountProfile accountProfile={accountProfile} />
+              accountProfile.isDecrypted ? <div></div> : <EncryptedAccountProfile accountProfile={accountProfile} index={index} />
             )}
           </Box>
         </div>

@@ -3,11 +3,11 @@ import AccountTitleBar from "./AccountTitleBar";
 import EduPrograms from "./EduPrograms";
 import Jobs from "./Jobs";
 
-export default function EncryptedAccountProfile({ accountProfile }) {
+export default function EncryptedAccountProfile({ accountProfile, index }) {
   return (
     <div style={{ border: "1px solid grey" }}>
       <div style={{ backgroundColor: "white" }}>
-        <AccountTitleBar account={accountProfile.account}></AccountTitleBar>
+        <AccountTitleBar account={accountProfile.account} accountProfile={accountProfile} index={index}></AccountTitleBar>
       </div>
       <Box p={2}>
         <Jobs jobs={accountProfile.jobs}></Jobs>
