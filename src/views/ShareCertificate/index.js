@@ -9,7 +9,7 @@ import ShowDecryptInfo from "./ShowDecryptedEduInfo";
 const useStyels = makeStyles((theme) => ({
   root: {
     "& > *": {
-      margin: theme.spacing(2, 0),
+      marginBottom: theme.spacing(2),
     },
   },
 }));
