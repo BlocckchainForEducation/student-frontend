@@ -1,8 +1,8 @@
 import { Box, Button, Typography, useTheme } from "@material-ui/core";
 import axios from "axios";
 import { useSnackbar } from "notistack";
-import { requirePrivateKeyHex } from "../../../utils/keyholder";
-import { ERR_TOP_CENTER } from "../../../utils/snackbar-utils";
+import { requirePrivateKeyHex } from "../../utils/keyholder";
+import { ERR_TOP_CENTER } from "../../utils/snackbar-utils";
 
 export default function AccountTitleBar({ accountProfile, index, updateAccountProfile }) {
   const theme = useTheme();
@@ -22,12 +22,22 @@ export default function AccountTitleBar({ accountProfile, index, updateAccountPr
     }
   }
 
+  const paddingSize = accountProfile.decrypted ? "14px" : "8px";
+
   return (
-    <Box p={1} display="flex" alignItems="center" justifyContent="space-between" style={{ borderBottom: "1px solid grey" }}>
-      <Typography variant="h5" style={{ flexGrow: "1" }}>{`Tài khoản: ${accountProfile.account.publicKeyHex}`}</Typography>
-      <Button variant="contained" color="primary" style={{ flexShrink: 0 }} onClick={hdDecryptAccountProfile}>
-        Mở khóa
-      </Button>
+    <Box display="flex" alignItems="center" justifyContent="space-between" style={{ borderBottom: "1px solid grey", padding: paddingSize }}>
+      <Typography variant="h4" style={{ flexGrow: "1" }}>{`Tài khoản: ${shortenPuclicKey(
+        accountProfile.account.publicKeyHex
+      )}`}</Typography>
+      {!accountProfile.decrypted && (
+        <Button variant="contained" color="primary" style={{ flexShrink: 0 }} onClick={hdDecryptAccountProfile}>
+          Mở khóa
+        </Button>
+      )}
     </Box>
   );
+}
+
+function shortenPuclicKey(publicKey) {
+  return publicKey.slice(0, 10) + "..." + publicKey.slice(-10);
 }

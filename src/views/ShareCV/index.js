@@ -1,12 +1,12 @@
-import View from "../../shared/View";
+import { Box } from "@material-ui/core";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
+import View from "../../shared/View";
 import { ERR_TOP_CENTER } from "../../utils/snackbar-utils";
-import ShareCVButtonBar from "./ShareCVButtonBar";
+import DecryptedAccountProfile from "./DecryptedAccountProfile";
 import EncryptedAccountProfile from "./EncryptedAccountProfile";
-import { Box, Paper, useTheme } from "@material-ui/core";
-import { setFetchedAccounts } from "../AccountManagement/redux";
+import ShareCVButtonBar from "./ShareCVButtonBar";
 
 export default function ShareCV(props) {
   const [fetching, setFetching] = useState(true);
@@ -16,7 +16,7 @@ export default function ShareCV(props) {
   function updateAccountProfile(accountProfile, index) {
     const cloneAccProfiles = [...accountProfiles];
     cloneAccProfiles[index] = accountProfile;
-    setFetchedAccounts(cloneAccProfiles);
+    setAccountProfiles(cloneAccProfiles);
   }
 
   useEffect(() => {
@@ -39,8 +39,8 @@ export default function ShareCV(props) {
           <ShareCVButtonBar></ShareCVButtonBar>
           <Box mt={2}>
             {accountProfiles.map((accountProfile, index) =>
-              accountProfile.isDecrypted ? (
-                <div>decrypted data</div>
+              accountProfile.decrypted ? (
+                <DecryptedAccountProfile {...{ updateAccountProfile, index, accountProfile }}></DecryptedAccountProfile>
               ) : (
                 <EncryptedAccountProfile {...{ updateAccountProfile, index, accountProfile }} />
               )

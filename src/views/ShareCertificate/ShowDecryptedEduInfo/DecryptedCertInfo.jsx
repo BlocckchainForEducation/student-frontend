@@ -47,14 +47,13 @@ export default function DecryptedCertInfo(props) {
   );
 }
 
-function CertTable({ cert }) {
-  console.log(cert);
+export function CertTable({ cert, titleVariant = "h4" }) {
   const plain = cert.plain;
   const [certPart1, certPart2] = separateCertificate(plain, cert);
   return (
     <>
       <Box pt={2} pb={1} display="flex" justifyContent="space-between" alignItems="center">
-        <Typography variant="h4">Thông tin bằng cấp</Typography>
+        <Typography variant={titleVariant}>Thông tin bằng cấp</Typography>
         {cert.type !== "revoke" && (
           <Tooltip title="Bằng cấp hợp lệ, sẵn sàng để chia sẻ">
             <CheckIcon color="primary" size="1rem"></CheckIcon>
@@ -79,7 +78,7 @@ function CertTable({ cert }) {
   );
 }
 
-function SimpleTable({ rows }) {
+export function SimpleTable({ rows }) {
   return (
     <TableContainer>
       <Table size="small">

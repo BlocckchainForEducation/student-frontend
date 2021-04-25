@@ -1,5 +1,5 @@
 import { Box } from "@material-ui/core";
-import AccountTitleBar from "./AccountTitleBar";
+import AccountTitleBar from "../AccountTitleBar";
 import EduPrograms from "./EduPrograms";
 import Jobs from "./Jobs";
 
