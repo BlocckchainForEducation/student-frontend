@@ -3,6 +3,7 @@ import axios from "axios";
 import FileSaver from "file-saver";
 import { useSnackbar } from "notistack";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import View from "../../shared/View";
 import { ERR_TOP_CENTER } from "../../utils/snackbar-utils";
 import DecryptedAccountProfile from "./DecryptedAccountProfile";
@@ -11,6 +12,8 @@ import ShareCVButtonBar from "./ShareCVButtonBar";
 
 export default function ShareCV(props) {
   const [fetching, setFetching] = useState(true);
+  const studentProfile = useSelector((state) => state.studentProfileSlice);
+  const sawtoothAccounts = useSelector((state) => state.sawtoothAccountsSlice.accounts);
   const [accountProfiles, setAccountProfiles] = useState(null);
   const { enqueueSnackbar } = useSnackbar();
 
@@ -46,20 +49,26 @@ export default function ShareCV(props) {
   }
 
   function hdClickShareCV() {
-    const cv = accountProfiles.map((accountProfile) => {
+    const sharedAccountProfiles = accountProfiles.map((accountProfile) => {
       const shareJobs = accountProfile.jobs.filter((job) => job.share === true);
       const shareEduPrograms = accountProfile.eduPrograms.filter((eduProgram) => eduProgram.share === true);
       return { account: { publicKeyHex: accountProfile.account.publicKeyHex }, jobs: shareJobs, eduPrograms: shareEduPrograms };
     });
-    // console.log(cv);
-    const cvFiltered = cv.filter((accProfile) => accProfile.jobs.length !== 0 || accProfile.eduPrograms.length !== 0);
-    console.log(cvFiltered.length);
-    if (cvFiltered.length === 0) {
+    const filtered = sharedAccountProfiles.filter((accProfile) => accProfile.jobs.length !== 0 || accProfile.eduPrograms.length !== 0);
+    if (filtered.length === 0) {
       alert("Hãy giải mã và chọn thông tin bạn muốn chia sẻ!");
     } else {
-      const content = JSON.stringify(cvFiltered);
+      // TODO: fix this imgSrc problem
+      const cloneStudentProfile = { ...studentProfile };
+      cloneStudentProfile.imgSrc = null;
+      cloneStudentProfile.defaultPublicKey = sawtoothAccounts[0].publicKeyHex;
+      const cv = {
+        studentProfile: cloneStudentProfile,
+        accountProfiles: filtered,
+      };
+      const content = JSON.stringify(cv, null, 2);
       var blob = new Blob([content], { type: "text/plain;charset=utf-8" });
-      FileSaver.saveAs(blob, "Share-CV.b4e");
+      FileSaver.saveAs(blob, "my-cv.b4e-cv");
     }
   }
 

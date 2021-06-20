@@ -4,7 +4,7 @@ export default function EduPrograms({ eduPrograms }) {
   return eduPrograms.map((eduPro, index) => (
     <Paper style={{ padding: "8px" }} key={index}>
       <Typography gutterBottom variant="h5">
-        Mã CTĐT: {eduPro.eduProgram.eduProgramId}
+        Mã CTĐT: {eduPro.subjects[0].versions[0].portfolio_id}
       </Typography>
       <hr />
 

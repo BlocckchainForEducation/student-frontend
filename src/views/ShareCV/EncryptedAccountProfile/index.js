@@ -10,7 +10,7 @@ export default function EncryptedAccountProfile({ accountProfile, index, updateA
         <AccountTitleBar {...{ updateAccountProfile, accountProfile, index }}></AccountTitleBar>
       </div>
       <Box p={2}>
-        <Jobs jobs={accountProfile.jobs}></Jobs>
+        {accountProfile.jobs.length > 0 && <Jobs jobs={accountProfile.jobs}></Jobs>}
         <Box mb={2}></Box>
         <EduPrograms eduPrograms={accountProfile.eduPrograms}></EduPrograms>
       </Box>

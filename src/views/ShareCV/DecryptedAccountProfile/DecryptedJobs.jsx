@@ -1,5 +1,6 @@
 import { Box, Divider, FormControlLabel, Grid, Paper, Typography } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
+
 import { getLinkFromTxid } from "../../../utils/utils";
 import { SimpleTable } from "../../ShareCertificate/ShowDecryptedEduInfo/DecryptedCertInfo";
 
@@ -9,7 +10,7 @@ export default function DecryptedJobs({ accountIndex, jobs, hdToggleShareJob }) 
       {jobs.map((job, jobIndex) => {
         const [part1, part2] = separateJob(job);
         return (
-          <div key={jobIndex}>
+          <Box mb={2} key={jobIndex}>
             <Paper style={{ padding: "8px 16px" }}>
               <FormControlLabel
                 control={<Checkbox checked={Boolean(job.share)} onChange={() => hdToggleShareJob(accountIndex, jobIndex)}></Checkbox>}
@@ -35,7 +36,7 @@ export default function DecryptedJobs({ accountIndex, jobs, hdToggleShareJob }) 
                 </Grid>
               </Paper>
             </Box>
-          </div>
+          </Box>
         );
       })}
     </div>
@@ -55,8 +56,8 @@ function separateJob(job) {
     "Vị trí công việc": job.start.plain.jobTitle,
     "Thời gian": job.start.plain.shift,
     "Bắt đầu từ": job.start.timestamp,
+    "Tình trạng": job.end ? `Kết thúc từ ${job.end.timestamp}` : "Đang làm việc",
     Txid: getLinkFromTxid(job.start.txid),
-    "Tình trạng công việc": job.end ? "Đang làm việc" : `Kết thúc từ ${job.end.timestamp}`,
   };
 
   return [part1, part2];

@@ -17,7 +17,7 @@ export default function DecryptedEduPrograms({ accountIndex, eduPrograms, hdTogg
                     onChange={() => hdToggleShareEduProgram(accountIndex, eduProgramIndex)}
                   ></Checkbox>
                 }
-                label={<Typography variant="h5">Mã CTĐT: {eduProgram.eduProgram.eduProgramId}</Typography>}
+                label={<Typography variant="h5">Mã CTĐT: {eduProgram.subjects[0].versions[0].portfolio_id}</Typography>}
               ></FormControlLabel>
             </Paper>
             <Box mb={1}></Box>

@@ -93,7 +93,7 @@ function TokenDialog({ token, setToken }) {
           color="primary"
           onClick={(e) => {
             var blob = new Blob([token], { type: "text/plain;charset=utf-8" });
-            FileSaver.saveAs(blob, "B4E-Certificate-Token.jwt");
+            FileSaver.saveAs(blob, "my-cert.b4e-cert");
             setToken(null);
           }}
         >
