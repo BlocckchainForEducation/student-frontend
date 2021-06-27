@@ -4,9 +4,9 @@ import { Paper } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { getLinkFromTxid } from "../../../utils/utils";
 
-export default function DecryptedSecondaryCert({ props }) {
-  const versions = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram?.certificate?.versions);
-
+export default function DecryptedSecondaryCert(props) {
+  const shareCertVersions = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram?.certificate?.versions);
+  const versions = props.versions || shareCertVersions;
   return (
     <div>
       <Paper>

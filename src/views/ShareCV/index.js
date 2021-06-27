@@ -73,7 +73,7 @@ export default function ShareCV(props) {
   }
 
   return (
-    <View>
+    <View title="Chia sẻ CV">
       {fetching ? null : (
         <div>
           <ShareCVButtonBar hdClickShareCV={hdClickShareCV}></ShareCVButtonBar>

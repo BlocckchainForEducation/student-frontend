@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedCertInfo(props) {
   const cls = useStyles();
-  const versions = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram?.certificate?.versions);
+  const shareCertVersions = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram?.certificate?.versions);
+  const versions = props.versions || shareCertVersions;
 
   return (
     <div>

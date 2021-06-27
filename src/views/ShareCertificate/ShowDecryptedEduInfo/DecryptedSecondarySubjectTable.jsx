@@ -2,9 +2,9 @@ import { useSelector } from "react-redux";
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { getLinkFromTxid } from "../../../utils/utils";
 
-export default function DecryptedSecondarySubjectTable({ props }) {
-  const grades = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram.subjects);
-
+export default function DecryptedSecondarySubjectTable({ subjects }) {
+  const subjectsFromRedux = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram?.subjects);
+  const grades = subjects || subjectsFromRedux;
   return (
     <div>
       <Paper>

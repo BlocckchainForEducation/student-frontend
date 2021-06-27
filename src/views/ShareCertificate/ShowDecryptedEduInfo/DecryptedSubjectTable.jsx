@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DecryptedSubjectTable(props) {
   const cls = useStyles();
-  const subjects = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram.subjects);
+  const subjectFromRedux = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram.subjects);
+  const subjects = props.subjects || subjectFromRedux;
 
   return (
     <div>
