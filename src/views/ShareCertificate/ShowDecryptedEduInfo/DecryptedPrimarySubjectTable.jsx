@@ -1,5 +1,4 @@
-import { TableBody } from "@material-ui/core";
-import { Table, TableContainer, TableHead, TableRow, TableCell, Paper } from "@material-ui/core";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { getLinkFromTxid } from "../../../utils/utils";
 

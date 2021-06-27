@@ -4,7 +4,7 @@ import { Paper } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { getLinkFromTxid } from "../../../utils/utils";
 
-export default function DecryptedPrimaryCert({ props }) {
+export default function DecryptedSecondaryCert({ props }) {
   const versions = useSelector((state) => state.shareCertificateSlice.decryptedEduProgram?.certificate?.versions);
 
   return (
@@ -12,7 +12,7 @@ export default function DecryptedPrimaryCert({ props }) {
       <Paper>
         {!versions && (
           <>
-            <Box pt={2} pb={1}>
+            <Box p={2}>
               <Typography variant="h4" gutterBottom>
                 Thông tin bằng cấp
               </Typography>
